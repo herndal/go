@@ -5,7 +5,7 @@ class Board {
     this.size = size;
     this.fullSize = size * size;
     this.grid = blankGrid();
-    
+    this.prevPositions = [];
   }
 
   swap(color) {
@@ -65,7 +65,8 @@ class Board {
       currentStone = nextInString.pop();
       stoneString.push(currentStone);
       this.neighbors(currentStone).forEach(neighb => {
-        if (this.grid[neighb] === color && !stoneString.includes(neighb)) {
+        if (this.grid[neighb] === color 
+          && !stoneString.includes(neighb)) {
           nextInString.push(neighb);
         }
         if (this.grid[neighb] !== color) {
@@ -79,4 +80,64 @@ class Board {
     });
   }
 
+  captureSurrounded(sPos) {
+    const { 
+      stoneString, 
+      bordered 
+    } = this.findString(sPos);
+    let capture = true;
+    bordered.forEach(sPos => {
+      if (this.grid[sPos] === empty) {
+        capture = false;
+      }
+    });
+    if (capture) {
+      this.placeManyStones(empty, stoneString);
+      return stoneString;
+    } else {
+      return [];
+    }
+  }
+
+  playMove(player, pos) {
+    const color = player.color;
+    const sPos = this.sPos(pos);
+    const opponent = swap(color);
+    const captured = 0;
+
+    //do nothing if position is occupied
+    if (this.grid[sPos] !== empty) return;
+
+    this.placeStone(color, sPos);
+
+    //find opponent stones in neighbors, capture if possible
+    this.neighbors(sPos).forEach(neighb => {
+      if (this.grid[neighb] === opponent) {
+        captured += this.captureSurrounded(neighb).length;
+      }
+    });
+
+    //check for suicidal move
+    while (oppStones.length) {
+      
+    }
+
+
+
+    if (this.prevPositions.includes(this.grid)) {
+      this.grid = this.prevPositions[this.prevPositions.length - 1];
+      throw "Ko! Invalid move, try again";
+    }
+    this.prevPositions.push(this.grid);
+    return this.grid;
+  }
+
+}
+
+
+class Player {
+  constructor(color) {
+    this.color = color;
+    this.captured = 0;
+  }
 }
