@@ -1,10 +1,10 @@
 const [white, black, empty, neutral] = ["X", "O", "_", "."];
 
-class Board {
+export class Board {
   constructor(size) {
     this.size = size;
     this.fullSize = size * size;
-    this.grid = blankGrid();
+    this.grid = this.blankGrid();
     this.prevPositions = [];
   }
 
@@ -147,23 +147,29 @@ class Board {
       }
     }
     //count up the final scores
-    const finalGrid = this.grid.toUpperCase();
+    const scoresGrid = this.grid.toUpperCase();
     let blackScore = 0;
     let whiteScore = 0;
-    for (let i = 0; i < finalGrid.length; i++) {
-      if (finalGrid[i] === black) blackScore++;
-      if (finalGrid[i] === white) whiteScore++;
+    for (let i = 0; i < scoresGrid.length; i++) {
+      if (scoresGrid[i] === black) blackScore++;
+      if (scoresGrid[i] === white) whiteScore++;
     };
     return ({
       blackScore,
-      whiteScore
+      whiteScore,
+      grid: this.grid
     })
   }
 }
 
-class Player {
+export class Player {
   constructor(color) {
     this.color = color;
     this.captured = 0;
+    this.pass = false;
+  }
+
+  takeTurn() {
+
   }
 }
