@@ -2,6 +2,7 @@ import {
   Board,
   Player
 } from './board';
+import "../styles/nav.css";
 
 const black = new Player('black');
 const white = new Player('white');
@@ -37,8 +38,8 @@ export default class Game {
         k++;
       }
       this.docBoard.appendChild(row);
-      this.docBoard.style.width = `${30 * this.size}px`;
-      this.docBoard.style.height = `${30 * this.size}px`;
+      this.docBoard.style.width = `${30 * this.size + 2}px`;
+      this.docBoard.style.height = `${30 * this.size + 2}px`;
     }
   }
 

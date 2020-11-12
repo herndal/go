@@ -17,6 +17,7 @@ function playGo(event) {
   //clear board
   const size = document.getElementById('size').value;
   const game = new Game(size);
+  document.querySelector("#root").removeChild(document.querySelector(".welcome"));
 }
 
 /* <form>

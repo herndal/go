@@ -4,22 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./dist/main.css" />
     <script src="./dist/main.js" defer></script>
     <title>Go</title>
   </head>
 
-  <body id="root">
-    <label for="size">Choose the size of your board:</label>
-    <select name="size" id="size" form="play-go">
-      <option value="5">5 x 5</option>
-      <option value="9">9 x 9</option>
-      <option value="13">13 x 13</option>
-      <option value="19">19 x 19</option>
-    </select>
-
-    <form id="play-go">
-      <input type="submit" value="Start Game">
-    </form>
+  <body>
+    <main id="root">
+      <h1>Go</h1>
+      <div class="welcome">
+        <label for="size">Choose the size of your board:</label>
+        <select name="size" id="size" form="play-go">
+          <option value="5">5 x 5</option>
+          <option value="9">9 x 9</option>
+          <option value="13">13 x 13</option>
+          <option value="19">19 x 19</option>
+        </select>
+        <form id="play-go">
+          <input type="submit" value="Start Game">
+        </form>
+      </div>
+    </main>
   </body>
 </html>

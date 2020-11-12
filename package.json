@@ -1,20 +1,30 @@
 {
-  "name": "js_project_skeleton",
+  "name": "go_project",
   "version": "1.0.0",
-  "description": "skeleton for new JS project",
-  "main": "index.js",
+  "description": "go board for two players",
+  "homepage": "https://herndal.github.io/go",
+  "repository": "github:herndal/go",
+  "bugs": {
+    "url": "https://github.com/herndal/go/issues",
+    "email": "don@donaldherndon.dev"
+  },
   "browserslist": [
     "last 1 version",
     "> 1%",
     "maintained node versions",
     "not dead"
   ],
+  "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js",
     "webpack:watch": "webpack --watch --config webpack.dev.js",
     "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize"
   },
-  "author": "herndal",
+  "author": {
+    "name": "Donald Herndon",
+    "email": "don@donaldherndon.dev",
+    "url": "https://donaldherndon.dev"
+  },
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
