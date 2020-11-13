@@ -4,8 +4,8 @@ import {
 } from './board';
 import "../styles/nav.css";
 
-const black = new Player('black');
-const white = new Player('white');
+const black = new Player('B');
+const white = new Player('W');
 
 export default class Game {
   constructor(size) {
@@ -66,10 +66,9 @@ export default class Game {
   }
 
   play() {
-
     // fresh players, fresh board
     // get user input
-    document.querySelector('board').addEventListener("click", this.playTurn(board));
+    document.querySelector('.board').addEventListener("click", this.playTurn(this.board));
     document.querySelector(".pass").addEventListener("click", this.passTurn);
     // take turns
     // listen for two passes in a row
@@ -84,16 +83,29 @@ export default class Game {
     } else {
       this.currentPlayer = black;
     }
-    const board = document.querySelector('board');
-    board.toggleClass('white');
-    board.toggleClass('black');
+    const board = document.querySelector('.board');
+    window.board = board;
+    board.classList.toggle('white');
+    board.classList.toggle('black');
   }
 
   playTurn(board) {
-    return function(e) {
-      if (!e.target.classList.contains('white') && !e.target.classList.contains('black')) {
-        const idx = e.target.classList
-        //play a turn on our board
+    return e => {
+      e.preventDefault();
+      window.player = this.currentPlayer;
+      window.internalBoard = board;
+      if (e.target.classList.contains('cell')) {
+        const sPos = e.target.dataset.index;
+        try {
+          console.log(board.grid);
+          if(board.playMove(this.currentPlayer, parseInt(sPos))) {
+            e.target.dataset.stone = this.currentPlayer.color;
+            this.swap();
+          }
+        } catch(err) {
+          console.log("internal board error");
+          window.error = err;
+        }
       }
     }
   }

@@ -15,7 +15,7 @@ export class Board {
   }
 
   blankGrid() {
-    return empty * this.fullSize;
+    return empty.repeat(this.fullSize);
   }
 
   sPos(pos) {
@@ -46,7 +46,7 @@ export class Board {
   }
 
   neighbors(sPos) {
-    [row, col] = this.pos(sPos);
+    const [row, col] = this.pos(sPos);
     const positions = [[row, col-1], [row-1, col], [row, col+1], [row+1, col]];
     const neighbs = [];
     positions.forEach(pos => {
@@ -99,11 +99,10 @@ export class Board {
     }
   }
 
-  playMove(player, pos) {
+  playMove(player, sPos) {
     const color = player.color;
-    const sPos = this.sPos(pos);
-    const opponent = swap(color);
-    const captured = 0;
+    const opponent = this.swap(color);
+    let captured = 0;
     //do nothing if position is occupied
     if (this.grid[sPos] !== empty) return;
     this.placeStone(color, sPos);
@@ -167,9 +166,5 @@ export class Player {
     this.color = color;
     this.captured = 0;
     this.pass = false;
-  }
-
-  takeTurn() {
-
   }
 }

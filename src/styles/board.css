@@ -82,7 +82,7 @@
   background-color: black;
   background-image: radial-gradient(circle at 32% 30%, #606060 0%, transparent 90%);
   border-radius: 50%;
-  box-shadow: 1px 1px 1px #404040;
+  box-shadow: 1px 1px 1px #000000;
 }
 .cell[data-stone='w'], .cell[data-stone='b'] {
   opacity: 0.5;
