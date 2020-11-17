@@ -1,7 +1,9 @@
 import Game from './scripts/game';
 import "./styles/reset.css";
+import "./styles/game.css";
 import "./styles/board.css";
-
+import "./styles/page.css";
+import "./styles/endgame.css";
 
 document.querySelector("#play-go").addEventListener("submit", playGo);
 

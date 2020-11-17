@@ -1,0 +1,21 @@
+.table {
+  display: flex;
+  width: 380px;
+  margin: 7px 0;
+}
+
+.totals {
+  padding: 15px;
+}
+
+.totals .cell {
+  margin: 0 auto;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  width: 150px;
+}

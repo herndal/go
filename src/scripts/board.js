@@ -1,6 +1,6 @@
-const [white, black, empty, neutral] = ["X", "O", "_", "."];
+const [white, black, empty, neutral] = ["W", "B", "_", "."];
 
-export class Board {
+export default class Board {
   constructor(size) {
     this.size = size;
     this.fullSize = size * size;
@@ -30,6 +30,7 @@ export class Board {
 
   validPos(pos) {
     const [x, y] = pos;
+    if(x < 0 || y < 0) return false;
     return (x % this.size === x && y % this.size === y);
   }
 
@@ -39,6 +40,7 @@ export class Board {
 
   placeManyStones(color, sPoses) {
     const arr = this.grid.split("");
+    var cell;
     sPoses.forEach(sPos => {
       arr[sPos] = color;
     });
@@ -57,7 +59,7 @@ export class Board {
 
   findString(sPos) {
     const color = this.grid[sPos];
-    const stoneString = [sPos];
+    const stoneString = [];
     const bordered = [];
     const nextInString = [sPos];
     let currentStone;
@@ -66,7 +68,8 @@ export class Board {
       stoneString.push(currentStone);
       this.neighbors(currentStone).forEach(neighb => {
         if (this.grid[neighb] === color 
-          && !stoneString.includes(neighb)) {
+          && !stoneString.includes(neighb)
+          && !nextInString.includes(neighb)) {
           nextInString.push(neighb);
         }
         if (this.grid[neighb] !== color) {
@@ -102,28 +105,30 @@ export class Board {
   playMove(player, sPos) {
     const color = player.color;
     const opponent = this.swap(color);
-    let captured = 0;
+    const grid = this.grid;
+    let capturedStones = [];
     //do nothing if position is occupied
-    if (this.grid[sPos] !== empty) return;
+    if (grid[sPos] !== empty) return;
     this.placeStone(color, sPos);
     //find opponent stones in neighbors, capture if possible
     this.neighbors(sPos).forEach(neighb => {
-      if (this.grid[neighb] === opponent) {
-        captured += this.captureSurrounded(neighb).length;
+      if (grid[neighb] === opponent) {
+        capturedStones = capturedStones.concat(this.captureSurrounded(neighb));
       }
     });
     //check for suicidal move
     if (this.captureSurrounded(sPos).length) {
+      this.placeStone(empty, sPos);
       throw "Suicide! Try again";
-    }
+    }2
     //check for ko
     if (this.prevPositions.includes(this.grid)) {
       this.grid = this.prevPositions[this.prevPositions.length - 1];
       throw "Ko! Invalid move, try again";
     }
-    player.captured += captured;
+    player.captured += capturedStones.length;
     this.prevPositions.push(this.grid);
-    return this.grid;
+    return capturedStones;
   }
 
   score() {
@@ -132,10 +137,11 @@ export class Board {
       let idx = this.grid.indexOf(empty);
       let { stoneString, bordered } = this.findString(idx);
       let borderColors = bordered.map(sPos => {
-        return this.grid[sPos].toUpperCase;
+        return this.grid[sPos].toUpperCase();
       });
       let matched = true;
       let firstColor = borderColors[0];
+      if(!firstColor) matched = false;
       borderColors.forEach(color => {
         if (color !== firstColor) matched = false;
       });
@@ -158,13 +164,5 @@ export class Board {
       whiteScore,
       grid: this.grid
     })
-  }
-}
-
-export class Player {
-  constructor(color) {
-    this.color = color;
-    this.captured = 0;
-    this.pass = false;
   }
 }

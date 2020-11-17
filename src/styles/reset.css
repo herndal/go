@@ -6,7 +6,7 @@ body, ul, div {
 
 body, select, input {
   font-family: 'Marcellus', serif;
-  color: #926611;
+  color: #cbb6b1;
   font-size: large;
 }
 
@@ -18,4 +18,9 @@ ul {
 h1 {
   font-size: 4em;
   margin: 0;
+}
+
+h2 {
+  text-align: center;
+  margin: 0 0 10px;
 }

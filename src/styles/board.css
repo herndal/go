@@ -2,8 +2,8 @@
 .board {
   display: flex;
   flex-direction: column;
-  margin: auto auto;
-  background: radial-gradient(rgba(155, 155, 155, 0.5), rgba(0, 0, 0, 0.5)), url("https://cabins-seeds.s3.amazonaws.com/go-oak.jpg");
+  margin: 0 auto;
+  background: radial-gradient(rgba(155, 155, 155, 0.6), rgba(0, 0, 0, 0.7)), url("https://cabins-seeds.s3.amazonaws.com/go-oak.jpg");
   background-size: cover;
   background-position: center;
   border-radius: 15px;
@@ -60,13 +60,13 @@
   bottom: 50%;
 }
 /* Cells */
-.board.white .cell[data-stone='_']:hover {
+.game.white .cell[data-stone='_']:hover {
   background-color: white;
   border-radius: 50%;
   box-shadow: 1px 1px 1px #404040, inset -3px -3px 5px rgb(128, 128, 128);
   opacity: 0.5;
 }
-.board.black .cell[data-stone='_']:hover {
+.game.black .cell[data-stone='_']:hover {
   background-color: black;
   background-image: radial-gradient(circle at 32% 30%, #606060 0%, transparent 90%);
   border-radius: 50%;
@@ -94,7 +94,7 @@
   background-repeat: no-repeat;
   border-radius: 50%;
 }
-.board.black .star[data-stone='_']:hover {
+.game.black .star[data-stone='_']:hover {
   background-color: black;
   background-image: radial-gradient(#000 15%, transparent 0), radial-gradient(circle at 32% 30%, #606060 0%, transparent 90%);
   border-radius: 50%;
