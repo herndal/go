@@ -1,26 +1,68 @@
 import Game from './scripts/game';
 import "./styles/reset.css";
+import "./styles/page.css";
 import "./styles/game.css";
 import "./styles/board.css";
-import "./styles/page.css";
 import "./styles/endgame.css";
 
-document.querySelector("#play-go").addEventListener("submit", playGo);
+const root = document.getElementById('root');
+home();
 
-function playGo(event) {
-  event.preventDefault();
-  //render the board
-  //listen for click: play turn
-  //surrender functionality
-  //end game
+function home() {
+  const title = document.createElement('h1');
+  title.innerHTML = 'Go';
+  root.append(title);
+  newGame();
+}
 
-  //restart game:
-  //unregister/reregister event listeners?
-  //clear board
-  const size = document.getElementById('size').value;
-  const game = new Game(size);
-  document.querySelector("#root").removeChild(document.querySelector(".welcome"));
-  game.play();
+function newGame() {
+  const oldGame = document.getElementById('game');
+  if(oldGame) root.removeChild(oldGame);
+  const gameForm = document.createElement('div');
+  const selectSize = document.createElement('select');
+  const selectSizeLabel = document.createElement('p');
+  const choose5 = document.createElement('option');
+  const choose9 = document.createElement('option');
+  const choose13 = document.createElement('option');
+  const choose19 = document.createElement('option');
+  const submit = document.createElement('button');
+  const play = document.createElement('form');
+  gameForm.classList.add('new-game');
+  selectSize.id = 'size';
+  play.id = 'play';
+  choose5.value = '5';
+  choose9.value = '9';
+  choose13.value = '13';
+  choose19.value = '19';
+  selectSizeLabel.innerHTML = 'Choose the size of your board:';
+  choose5.innerHTML = '5 x 5';
+  choose9.innerHTML = '9 x 9';
+  choose13.innerHTML = '13 x 13';
+  choose19.innerHTML = '19 x 19';
+  submit.innerHTML = 'Start Game';
+  selectSize.append(choose5, choose9, choose13, choose19);
+  play.append(selectSize, submit);
+  gameForm.append(selectSizeLabel, play);
+  root.appendChild(gameForm);
+  document.querySelector("#play").addEventListener("submit", playGo(gameForm));
+}
+
+function playGo(gameForm) {
+  return event => {
+    event.preventDefault();
+    //render the board
+    //listen for click: play turn
+    //surrender functionality
+    //end game
+    
+    //restart game:
+    //unregister/reregister event listeners?
+    //clear board
+    const size = document.getElementById('size').value;
+    const game = new Game(size, newGame);
+    root.removeChild(gameForm);
+    game.play();
+  }
 }
 
 /* <form>

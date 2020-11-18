@@ -4,10 +4,20 @@ body, ul, div {
   box-sizing: border-box;
 }
 
-body, select, input {
+body, select, button {
   font-family: 'Marcellus', serif;
-  color: #cbb6b1;
   font-size: large;
+  color: #cbb6b1;
+}
+
+button {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+button:hover {
+  background: radial-gradient(#250000, transparent 90%);
 }
 
 ul {
@@ -23,4 +33,8 @@ h1 {
 h2 {
   text-align: center;
   margin: 0 0 10px;
+}
+
+p {
+  margin: 0 10px;
 }

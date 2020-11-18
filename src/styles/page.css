@@ -1,6 +1,7 @@
 body {
   background: linear-gradient(90deg, #250000 0%, #4c0f00 50%, #250000 100%);
 }
+
 #root {
   height: 100vh;
   max-width: 1000px;
@@ -11,9 +12,15 @@ body {
   align-items: center;
 }
 
-.welcome {
+.new-game {
   margin: 10px auto 0;
   width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#play {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +31,11 @@ body {
   outline: none;
   border: none;
   font-size: large;
-  padding: 10px;
+  margin: 10px 0;
+  padding: 0 10px;
   font-family: 'Marcellus', serif;
+}
+
+#size:hover {
+  background: radial-gradient(#250000, transparent 90%);
 }

@@ -1,4 +1,4 @@
-.game {
+#game {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,9 +41,13 @@
   content: "Pass";
   font-size: 1.1em;
   text-align: right;
-  margin-left: -7px;
+  margin-left: -8px;
   line-height: 50px;
   border-radius: inherit;
+}
+
+.player.white .captured, .player.white.pass:after {
+  color: #4c0f00;
 }
 
 /* .player.offer-pass[data-player='white'] {

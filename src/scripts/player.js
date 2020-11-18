@@ -1,5 +1,6 @@
 export default class Player {
-  constructor(color) {
+  constructor(name, color) {
+    this.name = name;
     this.color = color;
     this.captured = 0;
   }
