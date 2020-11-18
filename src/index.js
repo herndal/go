@@ -1,6 +1,6 @@
 import Game from './scripts/game';
 import "./styles/reset.css";
-import "./styles/page.css";
+import "./styles/nav.css";
 import "./styles/game.css";
 import "./styles/board.css";
 import "./styles/endgame.css";
@@ -12,12 +12,47 @@ function home() {
   const title = document.createElement('h1');
   title.innerHTML = 'Go';
   root.append(title);
-  newGame();
+  options();
+  author();
+}
+
+function options() {
+  const oldGame = document.getElementById('game');
+  const gameForm = document.querySelector('.new-game');
+  const back = document.getElementById('back');
+  if(oldGame) root.removeChild(oldGame);
+  if(gameForm) root.removeChild(gameForm);
+  if(back) root.removeChild(back);
+  const options = document.createElement('ul');
+  const aboutButton = document.createElement('button');
+  const play = document.createElement('button');
+  const author = document.createElement('button');
+  options.id = 'options';
+  author.id = 'author';
+  play.id = 'play';
+  aboutButton.classList.add('option');
+  play.classList.add('option');
+  author.classList.add('option', 'red');
+  aboutButton.innerHTML = 'About';
+  play.innerHTML = 'Play';
+  author.innerHTML = 'Author';
+  aboutButton.onclick = about;
+  play.onclick = newGame;
+  options.append(play, aboutButton, author);
+  root.appendChild(options);
+}
+
+function author() {
+  
+}
+
+function about() {
+
 }
 
 function newGame() {
-  const oldGame = document.getElementById('game');
-  if(oldGame) root.removeChild(oldGame);
+  const docOptions = document.getElementById('options');
+  root.removeChild(docOptions);
   const gameForm = document.createElement('div');
   const selectSize = document.createElement('select');
   const selectSizeLabel = document.createElement('p');
@@ -27,9 +62,13 @@ function newGame() {
   const choose19 = document.createElement('option');
   const submit = document.createElement('button');
   const play = document.createElement('form');
+  const back = document.createElement('button');
+  const backGo = document.createElement('button');
   gameForm.classList.add('new-game');
+  backGo.classList.add('back-go', 'red');
   selectSize.id = 'size';
   play.id = 'play';
+  back.id = 'back';
   choose5.value = '5';
   choose9.value = '9';
   choose13.value = '13';
@@ -40,27 +79,23 @@ function newGame() {
   choose13.innerHTML = '13 x 13';
   choose19.innerHTML = '19 x 19';
   submit.innerHTML = 'Start Game';
+  backGo.innerHTML = 'Go';
+  back.onclick = options;
+  back.append(backGo, 'back');
   selectSize.append(choose5, choose9, choose13, choose19);
   play.append(selectSize, submit);
   gameForm.append(selectSizeLabel, play);
-  root.appendChild(gameForm);
-  document.querySelector("#play").addEventListener("submit", playGo(gameForm));
+  root.append(gameForm, back);
+  document.querySelector("#play").addEventListener("submit", playGo(gameForm, back));
 }
 
 function playGo(gameForm) {
   return event => {
     event.preventDefault();
-    //render the board
-    //listen for click: play turn
-    //surrender functionality
-    //end game
-    
-    //restart game:
-    //unregister/reregister event listeners?
-    //clear board
     const size = document.getElementById('size').value;
-    const game = new Game(size, newGame);
+    const game = new Game(size, options, newGame);
     root.removeChild(gameForm);
+    root.removeChild(back);
     game.play();
   }
 }

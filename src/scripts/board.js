@@ -83,19 +83,19 @@ export default class Board {
     });
   }
 
-  captureSurrounded(sPos) {
+  captureSurrounded(sPos, toPlace = true) {
     const { 
       stoneString, 
       bordered 
     } = this.findString(sPos);
     let capture = true;
-    bordered.forEach(sPos => {
-      if (this.grid[sPos] === empty) {
+    bordered.forEach(secondPos => {
+      if (this.grid[secondPos] === empty) {
         capture = false;
       }
     });
     if (capture) {
-      this.placeManyStones(empty, stoneString);
+      if (toPlace) this.placeManyStones(empty, stoneString);
       return stoneString;
     } else {
       return [];
@@ -117,10 +117,10 @@ export default class Board {
       }
     });
     //check for suicidal move
-    if (this.captureSurrounded(sPos).length) {
+    if (this.captureSurrounded(sPos, false).length) {
       this.placeStone(empty, sPos);
       throw "Suicide! Try again";
-    }2
+    }
     //check for ko
     if (this.prevPositions.includes(this.grid)) {
       this.grid = this.prevPositions[this.prevPositions.length - 1];

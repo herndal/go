@@ -123,7 +123,7 @@ export default class Game {
   }
 
   play() {
-    const notPasses = addPassListeners();
+    const notPasses = this.addPassListeners();
     document.querySelector('.board').addEventListener("click", this.playTurn(this.board, notPasses));
   }
 
@@ -149,6 +149,7 @@ export default class Game {
         try {
           const capturedStones = board.playMove(player, sPos);
           if(capturedStones) {
+            this.clearErrors();
             e.target.dataset.stone = color;
             let cell;
             capturedStones.forEach(index => {
@@ -158,14 +159,19 @@ export default class Game {
             notPasses[0]();
             notPasses[1]();
             const docPlayers = document.querySelector('.players');
-            docPlayers.dataset.pass = false;
+            if (docPlayers.dataset.pass === 'true') {
+              const opponentColor = color === 'W' ? 'B' : 'W';
+              const index = color === 'W' ? 0 : 1;
+              const opponent = document.querySelector(`[data-player="${opponentColor}"]`);
+              notPasses[index] = this.resetPassListeners(opponent);
+              docPlayers.dataset.pass = false;
+            }
             const capturedElement = document.querySelector(`.player.${name}`).childNodes[1];
             capturedElement.innerHTML = `${player.captured}`;
             this.swap();
           }
-        } catch(err) {
-          console.log("internal board error");
-          window.error = err;
+        } catch(error) {
+          this.renderError(error);
         }
       }
     }
@@ -183,10 +189,19 @@ export default class Game {
     return notPasses;
   }
 
+  resetPassListeners(player) {
+    let listeners = [this.offerPass(player), this.notPass(player)];
+    player.addEventListener('mouseover', listeners[0]);
+    player.addEventListener('mouseout', listeners[1]);
+    player.onclick = this.passTurn(player, listeners);
+    return listeners[1];
+  }
+
   offerPass(player) {
     return () => {
       if(player.dataset.player === this.currentPlayer.color) {
-        player.removeChild(player.childNodes[1]);
+        const pass = player.childNodes[1];
+        if (pass) player.removeChild(player.childNodes[1]);
         player.classList.add("pass");
         player.dataset.pass = true;
       }
@@ -211,6 +226,7 @@ export default class Game {
     return e => {
       if(player.dataset.player === this.currentPlayer.color) {
         e.preventDefault;
+        this.clearErrors();
         const docPlayers = document.querySelector('.players');
         if(docPlayers.dataset.pass === 'true') {
           this.endGame(docPlayers);
@@ -222,6 +238,23 @@ export default class Game {
         this.swap();
         }
       }
+    }
+  }
+
+  renderError(err) {
+    const board = document.querySelector('.board');
+    const error = document.createElement('h3');
+    error.id = 'error';
+    error.innerHTML = err;
+    board.after(error);
+  }
+  
+  clearErrors() {
+    const game = document.getElementById('game');
+    let error = document.getElementById('error');
+    while (error) {
+      game.removeChild(error);
+      error = document.getElementById('error');
     }
   }
 
