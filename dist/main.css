@@ -4,10 +4,20 @@ body, ul, div {
   box-sizing: border-box;
 }
 
-body, select, input {
+body, select, button {
   font-family: 'Marcellus', serif;
-  color: #926611;
   font-size: large;
+  color: #cbb6b1;
+}
+
+button {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+button:hover {
+  background: radial-gradient(#5a3030, transparent 75%);
 }
 
 ul {
@@ -20,7 +30,145 @@ h1 {
   font-size: 4em;
   margin: 0;
 }
-.game {
+
+h2 {
+  text-align: center;
+  margin: 0 0 10px;
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+h3 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 0.9em;
+}
+
+p {
+  margin: 0 10px;
+}
+
+hr {
+  border-color: #8e7171;
+  width: 88%;
+  margin: 2px 0px 15px;
+}
+body {
+  background: linear-gradient(90deg, #250000 0%, #4c0f00 50%, #250000 100%);
+}
+
+#root {
+  height: 100vh;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#options {
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  height: 160px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.option {
+  font-size: 1.1em;
+  font-weight: 400;
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.drop-button {
+  position: relative;
+}
+
+/* #about-list, #author-list {
+  top: 0;
+  left: 0;
+} */
+
+.list {
+  position: absolute;
+  display: none;
+  margin-top: 32px;
+}
+
+.show {
+  display: flex;
+}
+
+.link:hover {
+  color: #8e7171;
+}
+
+#author-list {
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5px;
+}
+
+#author-links {
+  display: flex;
+  width: 160px;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  color: #8e7171;
+}
+
+#author-links .link:hover {
+  color: #cbb6b1;
+}
+
+.new-game {
+  margin: 15px auto;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#play {
+  font-size: 1.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#size {
+  background: transparent;
+  outline: none;
+  border: none;
+  font-size: large;
+  margin: 10px 0;
+  padding: 0 10px;
+  font-family: 'Marcellus', serif;
+}
+
+#size:hover {
+  background: radial-gradient(#5a3030, transparent 75%);
+}
+
+#back {
+  margin-top: 12px;
+}
+
+.back-go {
+  padding-left: 0;
+}
+
+.red {
+  color: #8e7171;
+}
+#game {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +177,7 @@ h1 {
 .players {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 15px;
+  padding-top: 15px;
 }
 
 .player {
@@ -45,22 +193,42 @@ h1 {
   border: 1px solid #000;
 }
 
-.player[data-player='black'] {
-  background: linear-gradient(90deg, rgba(250, 250, 250, 0.1) 0%, rgba(0, 0, 0, 0.75) 85%), url("https://cabins-seeds.s3.amazonaws.com/newblack.jpg");
+.player[data-player='B'] {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0%, rgba(0, 0, 0, 0.75) 85%), url("https://cabins-seeds.s3.amazonaws.com/newblack.jpg");
   background-size: cover;
 }
 
-.player[data-player='white'] {
+.player[data-player='W'] {
   flex-direction: row;
-  background: linear-gradient(90deg, transparent 15%, rgba(250, 250, 250, 0.5) 100%), url('https://cabins-seeds.s3.amazonaws.com/whitewood.jpg');
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 15%, rgba(250, 250, 250, 0.5) 100%), url('https://cabins-seeds.s3.amazonaws.com/whitewood.jpg');
   background-size: cover;
+}
+
+.player.pass:after {
+  width: 98px;
+  height: inherit;
+  position: absolute;
+  content: "Pass";
+  font-size: 1.1em;
+  text-align: right;
+  margin-left: -8px;
+  line-height: 50px;
+  border-radius: inherit;
+}
+
+.player.white .captured, .player.white.pass:after {
+  color: #4c0f00;
+}
+
+.error {
+  margin-bottom: 5px;
 }
 /* Board layout */
 .board {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  background: radial-gradient(rgba(155, 155, 155, 0.5), rgba(0, 0, 0, 0.65)), url("https://cabins-seeds.s3.amazonaws.com/go-oak.jpg");
+  background: radial-gradient(rgba(155, 155, 155, 0.6), rgba(0, 0, 0, 0.7)), url("https://cabins-seeds.s3.amazonaws.com/go-oak.jpg");
   background-size: cover;
   background-position: center;
   border-radius: 15px;
@@ -117,13 +285,13 @@ h1 {
   bottom: 50%;
 }
 /* Cells */
-.game.white .cell[data-stone='_']:hover {
+#game.white .cell[data-stone='_']:hover {
   background-color: white;
   border-radius: 50%;
   box-shadow: 1px 1px 1px #404040, inset -3px -3px 5px rgb(128, 128, 128);
   opacity: 0.5;
 }
-.game.black .cell[data-stone='_']:hover {
+#game.black .cell[data-stone='_']:hover {
   background-color: black;
   background-image: radial-gradient(circle at 32% 30%, #606060 0%, transparent 90%);
   border-radius: 50%;
@@ -151,42 +319,62 @@ h1 {
   background-repeat: no-repeat;
   border-radius: 50%;
 }
-.game.black .star[data-stone='_']:hover {
+#game.black .star[data-stone='_']:hover {
   background-color: black;
   background-image: radial-gradient(#000 15%, transparent 0), radial-gradient(circle at 32% 30%, #606060 0%, transparent 90%);
   border-radius: 50%;
   box-shadow: 1px 1px 1px #404040;
   opacity: 0.5;
 }
-body {
-  background: rgb(189,137,83);
-  background: linear-gradient(90deg, #250000 0%, #4c0f00 50%, #250000 100%);
+.endgame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 }
-#root {
-  height: 100vh;
-  max-width: 1000px;
+
+.table {
+  margin: 15px 0 5px;
+  display: flex;
+  width: 380px;
+}
+
+.totals {
+  padding: 15px;
+}
+
+.totals .cell {
+  height: 40px;
+  width: 40px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-.welcome {
-  margin: 10px auto 0;
-  width: 300px;
+.total {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  width: 150px;
 }
 
-#size {
-  background: transparent;
-  outline: none;
-  border: none;
-  font-size: large;
-  padding: 10px;
-  font-family: 'Marcellus', serif;
+.totals.black {
+  background: linear-gradient(rgba(255, 255, 255, 0.25) 0%, rgba(0, 0, 0, 0.75) 85%), url("https://cabins-seeds.s3.amazonaws.com/newblack.jpg");
+  background-size: cover;
+}
+
+.totals.white {
+  background: linear-gradient(rgba(0, 0, 0, 0.3) 15%, rgba(250, 250, 250, 0.5) 100%), url('https://cabins-seeds.s3.amazonaws.com/whitewood.jpg');
+  background-size: cover;
+  color: #4c0f00;
+}
+
+.table h2 {
+  margin-bottom: 2px;
+}
+
+#game button {
+  font-size: 1.1em;
+  margin-top: 20px;
 }
 
 /*# sourceMappingURL=main.css.map*/
