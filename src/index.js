@@ -1,4 +1,9 @@
 import Game from './scripts/game';
+import {
+  dropdown,
+  authorElements,
+  aboutElements
+ } from './scripts/dropdowns';
 import "./styles/reset.css";
 import "./styles/nav.css";
 import "./styles/game.css";
@@ -13,7 +18,6 @@ function home() {
   title.innerHTML = 'Go';
   root.append(title);
   options();
-  author();
 }
 
 function options() {
@@ -24,30 +28,16 @@ function options() {
   if(gameForm) root.removeChild(gameForm);
   if(back) root.removeChild(back);
   const options = document.createElement('ul');
-  const aboutButton = document.createElement('button');
   const play = document.createElement('button');
-  const author = document.createElement('button');
   options.id = 'options';
-  author.id = 'author';
   play.id = 'play';
-  aboutButton.classList.add('option');
   play.classList.add('option');
-  author.classList.add('option', 'red');
-  aboutButton.innerHTML = 'About';
   play.innerHTML = 'Play';
-  author.innerHTML = 'Author';
-  aboutButton.onclick = about;
   play.onclick = newGame;
-  options.append(play, aboutButton, author);
+  options.appendChild(play);
+  dropdown(options, 'About', aboutElements());
+  dropdown(options, 'Author', authorElements());
   root.appendChild(options);
-}
-
-function author() {
-  
-}
-
-function about() {
-
 }
 
 function newGame() {
@@ -63,7 +53,7 @@ function newGame() {
   const submit = document.createElement('button');
   const play = document.createElement('form');
   const back = document.createElement('button');
-  const backGo = document.createElement('button');
+  const backGo = document.createElement('span');
   gameForm.classList.add('new-game');
   backGo.classList.add('back-go', 'red');
   selectSize.id = 'size';
@@ -73,18 +63,18 @@ function newGame() {
   choose9.value = '9';
   choose13.value = '13';
   choose19.value = '19';
-  selectSizeLabel.innerHTML = 'Choose the size of your board:';
+  selectSizeLabel.innerHTML = 'Choose the size of your board';
   choose5.innerHTML = '5 x 5';
   choose9.innerHTML = '9 x 9';
   choose13.innerHTML = '13 x 13';
   choose19.innerHTML = '19 x 19';
   submit.innerHTML = 'Start Game';
-  backGo.innerHTML = 'Go';
+  backGo.innerHTML = 'back';
   back.onclick = options;
-  back.append(backGo, 'back');
+  back.append('Go ', backGo);
   selectSize.append(choose5, choose9, choose13, choose19);
   play.append(selectSize, submit);
-  gameForm.append(selectSizeLabel, play);
+  gameForm.append(selectSizeLabel, document.createElement('hr'), play);
   root.append(gameForm, back);
   document.querySelector("#play").addEventListener("submit", playGo(gameForm, back));
 }

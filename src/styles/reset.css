@@ -17,7 +17,7 @@ button {
 }
 
 button:hover {
-  background: radial-gradient(#250000, transparent 90%);
+  background: radial-gradient(#5a3030, transparent 75%);
 }
 
 ul {
@@ -37,6 +37,18 @@ h2 {
   font-weight: 400;
 }
 
+h3 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 0.9em;
+}
+
 p {
   margin: 0 10px;
+}
+
+hr {
+  border-color: #8e7171;
+  width: 88%;
+  margin: 2px 0px 15px;
 }
