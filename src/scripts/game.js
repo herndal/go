@@ -241,12 +241,15 @@ export default class Game {
     }
   }
 
-  renderError(err) {
+  renderError(message) {
     const board = document.querySelector('.board');
-    const error = document.createElement('h3');
-    error.id = 'error';
-    error.innerHTML = err;
-    board.after(error);
+    let error = document.getElementById('error');
+    if(!error) {
+      error = document.createElement('h3');
+      error.id = 'error';
+      board.after(error);
+    }
+    error.innerHTML = message;
   }
   
   clearErrors() {

@@ -20,9 +20,7 @@ function reveal(dropdown, list) {
   return event => {
     event.stopPropagation();
     hideLists();
-    if (!list.classList.contains('show')) {
-      list.classList.add('show');
-    }
+    list.classList.toggle('show');
   }
 }
 
@@ -41,21 +39,27 @@ export function authorElements() {
   const links = document.createElement('ul');
   const github = document.createElement('li');
   const linkedIn = document.createElement('li');
-  const angelList = document.createElement('li');
   const twitter = document.createElement('li');
+  const ghLink = document.createElement('a');
+  const liLink = document.createElement('a');
+  const twLink = document.createElement('a');
+  name.classList.add('red');
+  name.innerHTML = 'Donald Herndon';
   links.id = 'author-links';
   github.classList.add('link');
   linkedIn.classList.add('link');
-  angelList.classList.add('link');
   twitter.classList.add('link');
-  name.classList.add('red');
-  name.innerHTML = 'Donald Herndon';
-  github.innerHTML = 'GH';
-  linkedIn.innerHTML = 'LI';
-  angelList.innerHTML = 'AL';
-  twitter.innerHTML = 'TW';
-  links.append(github, linkedIn, angelList, twitter);
-  elements.push(links, name);
+  ghLink.href = 'https://github.com/herndal/go';
+  liLink.href = 'https://www.linkedin.com/in/donald-herndon-8364b01a5/';
+  twLink.href = 'https://twitter.com/donald_builds';
+  ghLink.innerHTML = '<i class="fab fa-github-square"></i>';
+  liLink.innerHTML = '<i class="fab fa-linkedin"></i>';
+  twLink.innerHTML = '<i class="fab fa-twitter-square"></i>';
+  github.appendChild(ghLink);
+  linkedIn.appendChild(liLink);
+  twitter.appendChild(twLink);
+  links.append(github, linkedIn, twitter);
+  elements.push(name, links);
   return elements;
 }
 

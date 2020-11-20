@@ -63,13 +63,17 @@ body {
 
 #author-links {
   display: flex;
-  width: 160px;
+  width: 155px;
   justify-content: space-between;
-  margin-bottom: 12px;
-  color: #8e7171;
+  font-size: 35px;
 }
 
-#author-links .link:hover {
+#author-links a{
+  color: #8e7171;
+  transition: color 0.15s ease-in-out;
+}
+
+#author-links a:hover {
   color: #cbb6b1;
 }
 

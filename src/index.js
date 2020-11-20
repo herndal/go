@@ -52,13 +52,9 @@ function newGame() {
   const choose19 = document.createElement('option');
   const submit = document.createElement('button');
   const play = document.createElement('form');
-  const back = document.createElement('button');
-  const backGo = document.createElement('span');
   gameForm.classList.add('new-game');
-  backGo.classList.add('back-go', 'red');
   selectSize.id = 'size';
   play.id = 'play';
-  back.id = 'back';
   choose5.value = '5';
   choose9.value = '9';
   choose13.value = '13';
@@ -69,14 +65,11 @@ function newGame() {
   choose13.innerHTML = '13 x 13';
   choose19.innerHTML = '19 x 19';
   submit.innerHTML = 'Start Game';
-  backGo.innerHTML = 'back';
-  back.onclick = options;
-  back.append('Go ', backGo);
   selectSize.append(choose5, choose9, choose13, choose19);
   play.append(selectSize, submit);
   gameForm.append(selectSizeLabel, document.createElement('hr'), play);
   root.append(gameForm, back);
-  document.querySelector("#play").addEventListener("submit", playGo(gameForm, back));
+  document.querySelector("#play").addEventListener("submit", playGo(gameForm, backButton());
 }
 
 function playGo(gameForm) {
@@ -88,6 +81,17 @@ function playGo(gameForm) {
     root.removeChild(back);
     game.play();
   }
+}
+
+function backButton() {
+  const button = document.createElement('button');
+  const back = document.createElement('span');
+  back.classList.add('back-go', 'red');
+  button.id = 'back';
+  go.innerHTML = 'back';
+  button.onclick = options;
+  button.append('Go ', back);
+  return button;
 }
 
 /* <form>
