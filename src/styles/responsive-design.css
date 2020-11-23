@@ -1,0 +1,98 @@
+/* Tablets */
+@media only screen and (min-width: 600px) {
+  body, select, button {
+    font-size: 25px;
+  }
+
+  .list {
+    margin-top: 50px;
+  }
+
+  #options {
+    height: 250px;
+  }
+}
+
+/* Narrow mobile devices in landscape mode */
+@media only screen and (max-height: 550px) {
+  h1 {
+    position: absolute;
+    left: 12vw;
+  }
+
+  #options {
+    margin-top: 10px;
+  }
+
+  .dropdown {
+    flex-direction: row;
+  }
+
+  .list {
+    margin: 0;
+    right: 8vw;
+    top: 0;
+    bottom: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #author-list {
+    flex-direction: column-reverse;
+    padding: 0;
+    justify-content: center;
+  }
+
+  #author-links {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 4px;
+  }
+
+  h3:first-child {
+    font-size: 0.7em;
+    text-align: center;
+  }
+
+  .new-game, #back {
+    position: relative;
+    left: 15vw;
+  }
+
+  #game.over {
+    flex-direction: row;
+  }
+
+  #game button {
+    font-size: 1.2em;
+  }
+
+  .endgame {
+    margin: 0 20px 0 0;
+  }
+
+  .board-group .board {
+    margin: 10px 0 5px;
+  }
+
+  .board-group {
+    flex-direction: column-reverse;
+  }
+}
+
+/* Larger laptops and up */
+@media only screen and (min-width: 1300px) {
+  body, select, button {
+    font-size: 30px;
+  }
+
+  .list {
+    margin-top: 75px;
+  }
+
+  #options {
+    height: 350px;
+    margin-top: 60px;
+  }
+}

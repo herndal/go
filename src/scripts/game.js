@@ -14,8 +14,48 @@ export default class Game {
     this.board = new Board(size);
     this.reset();
     this.drawGame(size);
+    this.landscapeListener();
     this.passTurn = this.passTurn.bind(this);
-    this.newGame = newGame.bind(this);
+    this.return = this.return(newGame.bind(this)).bind(this);
+  }
+
+  landscapeListener() {
+    let query = window.matchMedia("(max-height: 550px)");
+    this.toggleTitle(query);
+    query.addListener(this.toggleTitle);
+  }
+
+  toggleTitle(query) {
+    const root = document.getElementById('root');
+    const game = document.getElementById('game');
+    let title = document.getElementsByTagName('h1')[0];
+    if (query.matches && game && title) {
+      root.removeChild(title)
+    } else if (title) {
+      return;
+    } else {
+      title = document.createElement('h1');
+      title.innerHTML = 'Go';
+      root.firstChild.before(title);
+    }
+  }
+
+  addTitle(query) {
+    const game = document.getElementById('game');
+    let title = document.getElementsByTagName('h1')[0];
+    if (query.matches && !title) {
+      title = document.createElement('h1');
+      title.innerHTML = 'Go';
+      game.before(title);
+    }
+  }
+
+  return(newGame) {
+    return () => {
+      let query = window.matchMedia("(max-height: 550px)");
+      newGame();
+      this.toggleTitle(query);
+    }
   }
 
   reset() {
@@ -56,20 +96,6 @@ export default class Game {
     whitePlayer.dataset.player = 'W';
     blackCaptured.innerHTML = `${black.captured}`;
     whiteCaptured.innerHTML = `${white.captured}`;
-    switch(size) {
-      case "5":
-        docPlayers.style.width = "210px";
-        break;
-      case "9":
-        docPlayers.style.width = "250px";
-        break;
-      case "13":
-        docPlayers.style.width = "310px";
-        break;
-      case "19":
-        docPlayers.style.width = "410px";
-        break;
-    }
     this.addCell(blackPlayer, 'B');
     this.addCell(whitePlayer, 'W');
     blackPlayer.appendChild(blackCaptured);
@@ -79,10 +105,10 @@ export default class Game {
   }
 
   drawBoard(size, game) {
+    const boardGroup = document.createElement('div');
     const board = document.createElement('ul');
-    board.classList.add('board');
-    board.style.width = `${30 * size + 2}px`;
-    board.style.height = `${30 * size + 2}px`;
+    boardGroup.classList.add('board-group');
+    board.classList.add('board', `s${size}`);
     let k = 0;
     for (let i = 0; i < size; i++) {
       let row = document.createElement('ul');
@@ -97,7 +123,8 @@ export default class Game {
       }
       board.appendChild(row);
     }
-    game.appendChild(board);
+    boardGroup.appendChild(board);
+    game.appendChild(boardGroup);
   }
 
   drawStars(size) {
@@ -263,13 +290,14 @@ export default class Game {
 
   endGame(docPlayers) {
     const game = document.querySelector('#game');
+    game.classList.add('over');
     game.removeChild(docPlayers);
     this.drawScore();
   }
 
   drawScore() {
     const {blackScore, whiteScore, grid} = this.board.score();
-    const board = document.querySelector('.board');
+    const boardGroup = document.querySelector('.board-group');
     const endGame = document.createElement('div');
     const winMessage = document.createElement('h2');
     const table = document.createElement('div');
@@ -288,7 +316,7 @@ export default class Game {
       winMessage.innerHTML = `It's a draw!`; //or draw
     }
     goHome.innerHTML = 'Home';
-    goHome.onclick = this.newGame;
+    goHome.onclick = this.return;
     this.addCell(blackTotals, 'B');
     this.addCell(whiteTotals, 'W');
     this.addScore(blackTotals, blackScore);
@@ -301,8 +329,8 @@ export default class Game {
       let cell = document.querySelector(`[data-index="${i}"]`);
       cell.dataset.stone = grid[i];
     }
-    board.before(endGame);
-    board.after(goHome);
+    boardGroup.before(endGame);
+    boardGroup.appendChild(goHome);
   }
 
   addCaptured(element, color) {

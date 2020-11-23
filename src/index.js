@@ -9,6 +9,7 @@ import "./styles/nav.css";
 import "./styles/game.css";
 import "./styles/board.css";
 import "./styles/endgame.css";
+import "./styles/responsive-design.css";
 
 const root = document.getElementById('root');
 home();
@@ -68,8 +69,8 @@ function newGame() {
   selectSize.append(choose5, choose9, choose13, choose19);
   play.append(selectSize, submit);
   gameForm.append(selectSizeLabel, document.createElement('hr'), play);
-  root.append(gameForm, back);
-  document.querySelector("#play").addEventListener("submit", playGo(gameForm, backButton());
+  root.append(gameForm, backButton());
+  document.querySelector("#play").addEventListener("submit", playGo(gameForm));
 }
 
 function playGo(gameForm) {
@@ -88,7 +89,7 @@ function backButton() {
   const back = document.createElement('span');
   back.classList.add('back-go', 'red');
   button.id = 'back';
-  go.innerHTML = 'back';
+  back.innerHTML = 'back';
   button.onclick = options;
   button.append('Go ', back);
   return button;

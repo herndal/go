@@ -1,21 +1,64 @@
+/* Responsive Design
+  >1440px: bigger buttons, bigger font-size
+  <1024px: smaller 19x19 board
+  <440px: smaller 13x13 board
+
+*/
+
+
+
 /* Board layout */
+.board-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.over .board-group {
+  height: calc(75vh - 4em);
+}
 .board {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
   background: radial-gradient(rgba(155, 155, 155, 0.6), rgba(0, 0, 0, 0.7)), url("https://cabins-seeds.s3.amazonaws.com/go-oak.jpg");
   background-size: cover;
   background-position: center;
   border-radius: 15px;
   border: 1px solid #000;
+  height: min(85vw, calc(75vh - 4em - 1.2em - 10px));
+  width: min(85vw, calc(75vh - 4em - 1.2em - 10px));
 }
 .row {
   display: flex;
+  width: 100%;
 }
 .cell {
-  height: 30px;
-  width: 30px;
   position: relative;
+  height: 100%;
+}
+.s5 .row {
+  height: calc(100% / 5);
+}
+.s9 .row {
+  height: calc(100% / 9);
+}
+.s13 .row {
+  height: calc(100% / 13);
+}
+.s19 .row {
+  height: calc(100% / 19);
+}
+.s5 .cell {
+  width: calc(100% / 5);
+}
+.s9 .cell {
+  width: calc(100% / 9);
+}
+.s13 .cell {
+  width: calc(100% / 13);
+}
+.s19 .cell {
+  width: calc(100% / 19);
 }
 /* Grid lines */
 .cell[data-stone='.']:before, .cell[data-stone='_']:before {
@@ -93,6 +136,9 @@
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 50%;
+}
+.s5 .star[data-stone='_'], .star[data-stone='.'] {
+  background-image: radial-gradient(#000 10%, transparent 0);
 }
 #game.black .star[data-stone='_']:hover {
   background-color: black;
