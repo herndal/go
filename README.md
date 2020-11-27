@@ -1,180 +1,27 @@
-1. create your new project directory and `cd` into it 
-2. `git init`
-3. create a simple `.gitignore`
-        
-        # .gitignore
+# Go
+[Play now!](https://herndal.github.io/go)
+This introductory rendition for two players was made with vanilla JavaScript and webpack.
 
-        /node_modules/
-4. `npm init` and follow prompts
-5. install dev dependencies
-   
-        npm install @babel/core @babel/preset-env autoprefixer babel-loader css-loader fibers file-loader mini-css-extract-plugin node-sass postcss-loader sass sass-loader style-loader url-loader webpack webpack-cli webpack-dev-server webpack-merge --save-dev
+## Background of Go
+Go is an ancient game of Chinese origin. Characterized by extremely simple rules with a large playing field, it expands to become incredibly complex. In 2016, Go became the last board game for AI to best humans at. The brute-force search and analysis algorithms that worked for games like Chess were impossible in a game of so many possibilities. The project that made this Go program resulted in great advances in AI, and was filmed for a fantastic 90-minute documentary that you can watch on YouTube [here](https://www.youtube.com/watch?v=WXuK6gekU1Y). This documentary and a good friend inspired me to learn to play Go, and to try to replicate the game for myself - this is not nearly as difficult as making an AI player, but it has been a great project for sharpening my JavaScript skills and deepening my mastery of object relations.
 
-6. create basic `/src` subdirectory file structure
+The premise of very simple relationships compounding to create complex structures is influencing the cutting edge of computer science and physics theory today; read Stephen Wolfram's [introduction to the Wolfram Physics Project](https://writings.stephenwolfram.com/2020/04/finally-we-may-have-a-path-to-the-fundamental-theory-of-physics-and-its-beautiful/).
 
-        - src/
-            - index.js
-            styles/
-                - index.scss
-            scripts/
+How amazing that the research and modeling our geniuses are conducting today with supercomputers is continuous with concepts that humans have been exploring since before written language! Go is so old that its origin is not known for certain, but told with myths and legends. In China and in Korea, playing Go is revered as a fine art, with the same level of respect.
 
-7. In your root directory, create `webpack.common.js`
+If you have not heard of or played Go before, [my game](https://herndal.github.io/go) has basic instructions and options for a small board. Play with a friend, watch [the AlphaGo documentary](https://www.youtube.com/watch?v=WXuK6gekU1Y), and help develop in the West an appreciation of Go!
 
-    ```JavaScript
-    // webpack.common.js
+## My Game
 
-    const path = require("path");
-    const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-    const outputDir = "./dist";
+### Navigation
 
-    module.exports = {
-    entry: path.resolve(__dirname, "src", "index.js"), //
-    output: {
-        path: path.join(__dirname, outputDir),
-        filename: "[name].js",
-        publicPath: "/dist/"
-    },
-    resolve: {
-        extensions: [".js"] // if we were using React.js, we would include ".jsx"
-    },
-    module: {
-        rules: [
-        {
-            test: /\.js$/, // if we were using React.js, we would use \.jsx?$/
-            use: {
-            loader: "babel-loader",
-            options: {
-                presets: ["@babel/preset-env"],
-                plugins: ["@babel/plugin-proposal-optional-chaining"],
-                exclude: /node_modules/
-            } // if we were using React.js, we would include "react"
-            }
-        },
-        {
-            test: /\.css$/,
-            use: [
-            {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                // you can specify a publicPath here
-                // by default it uses publicPath in webpackOptions.output
-                publicPath: "../",
-                hmr: process.env.NODE_ENV === "development"
-                }
-            },
-            "css-loader",
-            "postcss-loader"
-            ]
-        },
-        {
-            test: /\.(png|jpe?g|gif)$/i,
-            use: [
-            {
-                loader: "file-loader",
-                options: {
-                // you can specify a publicPath here
-                // by default it uses publicPath in webpackOptions.output
-                name: "[name].[ext]",
-                outputPath: "images/",
-                publicPath: "images/"
-                }
-            }
-            ]
-        },
-        {
-            test: /\.scss/,
-            use: [
-            {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                // you can specify a publicPath here
-                // by default it uses publicPath in webpackOptions.output
-                publicPath: "../",
-                hmr: process.env.NODE_ENV === "development"
-                }
-            },
-            "css-loader",
-            "sass-loader",
-            "postcss-loader"
-            ]
-        }
-        ]
-    },
-    plugins: [
-        new MiniCssExtractPlugin({
-        // Options similar to the same options in webpackOptions.output
-        // all options are optional
-        filename: "[name].css",
-        chunkFilename: "[id].css",
-        ignoreOrder: false // Enable to remove warnings about conflicting order
-        }),
-        require("autoprefixer")
-    ]
-    };
+### Gameplay
 
-    ```
+### Technology and Things I Learned
 
-8. Create `webpack.dev.js`
+THE POWER OF JAVASCRIPT!
 
-    ```JavaScript
-    // wepack.dev.js
-    const merge = require("webpack-merge");
-    const common = require("./webpack.common.js");
+The HTML of this document is minimal, less than 20 lines long and mostly concerned with meta information. Beyond that, nothing but Javascript and CSS power this game, from the dynamic menu with dropdowns to the gameplay itself. Images like the woodgrain board background are hosted on Amazon Web Services S3 for easy access and to trim weight. In conjunction with Webpack, this approach makes for a game that is effortlessly lightweight and lightning-quick, designed with mobile-first responsive behavior to be fun to play on any sized device with mouse or touchscreen.
 
-    module.exports = merge(common, {
-        mode: "development",
-        devtool: "inline-source-map",
-        devServer: {
-            contentBase: "./",
-            watchContentBase: true,
-            open: "Google Chrome"
-        }
-    });
-    ```
-
-9. Create `webpack.prod.js`
-
-    ```JavaScript
-    // webpack.prod.js
-    const merge = require("webpack-merge");
-    const common = require("./webpack.common.js");
-
-    module.exports = merge(common, {
-        mode: "production",
-        devtool: "source-map"
-    });
-    ```
-
-10. create `postcss.config.js`
-
-    ```JavaScript
-    // postcss.config.js
-    module.exports = {
-        plugins: {
-            autoprefixer: {}
-        }
-    };
-    ```
-
-11. add `browserlist` key and update `scripts` in `package.json`
-
-    ```JavaScript
-    // package.json
-    "browserslist": [
-        "last 1 version",
-        "> 1%",
-        "maintained node versions",
-        "not dead"
-    ],
-    "scripts": {
-        "start": "webpack-dev-server --config webpack.dev.js",
-        "webpack:watch": "webpack --watch --config webpack.dev.js",
-        "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize"
-    },
-    ```
-
-12. create `index.scss` in `/src/styles`
-
-13. create `index.js` in `/src` directory and import style `/src/styles/index.scss`
-
-14. create `index.html` and import `dist/main.css` and `dist/main.js` appropriately
+### Credits and References
+Thank you to Fontawesome and Flaticon!

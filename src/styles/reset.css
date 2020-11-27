@@ -53,3 +53,12 @@ hr {
   width: 88%;
   margin: 2px 0px 15px;
 }
+
+a {
+  color: #8e7171;
+  transition: color 0.15s ease-in-out;
+}
+
+a:hover {
+  color: #cbb6b1;
+}

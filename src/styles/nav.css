@@ -49,6 +49,7 @@ body {
 
 .link {
   line-height: 1.6;
+  font-size: 1.1em;
 }
 
 .show {
@@ -57,6 +58,19 @@ body {
 
 .link:hover {
   color: #8e7171;
+}
+
+.wikipedia {
+  background-color:#cbb6b1;
+  color: #4c0f00;
+  /* padding: 3px 2px 0; */
+  border-radius: 3px;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.wikipedia:hover {
+  background-color:#8e7171;
+  color: #4c0f00;
 }
 
 #author-list {
@@ -69,16 +83,6 @@ body {
   display: flex;
   width: 155px;
   justify-content: space-between;
-  font-size: 35px;
-}
-
-#author-links a{
-  color: #8e7171;
-  transition: color 0.15s ease-in-out;
-}
-
-#author-links a:hover {
-  color: #cbb6b1;
 }
 
 .new-game {

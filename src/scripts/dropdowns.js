@@ -34,36 +34,44 @@ function hideLists() {
 }
 
 export function authorElements() {
-  const elements = [];
   const name = document.createElement('h3');
-  const links = document.createElement('ul');
-  const github = document.createElement('li');
-  const linkedIn = document.createElement('li');
-  const twitter = document.createElement('li');
-  const ghLink = document.createElement('a');
-  const liLink = document.createElement('a');
-  const twLink = document.createElement('a');
   name.classList.add('red');
   name.innerHTML = 'Donald Herndon';
+  const links = document.createElement('ul');
   links.id = 'author-links';
-  github.classList.add('link');
-  linkedIn.classList.add('link');
-  twitter.classList.add('link');
-  ghLink.href = 'https://github.com/herndal/go';
-  liLink.href = 'https://www.linkedin.com/in/donald-herndon-8364b01a5/';
-  twLink.href = 'https://twitter.com/donald_builds';
-  ghLink.innerHTML = '<i class="fab fa-github-square"></i>';
-  liLink.innerHTML = '<i class="fab fa-linkedin"></i>';
-  twLink.innerHTML = '<i class="fab fa-twitter-square"></i>';
-  github.appendChild(ghLink);
-  linkedIn.appendChild(liLink);
-  twitter.appendChild(twLink);
+  const github = listLink(
+    'https://github.com/herndal/go',
+    '<i class="fab fa-github-square"></i>'
+  );
+  const linkedIn= listLink(
+    'https://www.linkedin.com/in/donald-herndon-8364b01a5/',
+    '<i class="fab fa-linkedin"></i>'
+  );
+  const twitter = listLink(
+    'https://twitter.com/donald_builds',
+    '<i class="fab fa-twitter-square"></i>'
+  );
   links.append(github, linkedIn, twitter);
-  elements.push(name, links);
-  return elements;
+  return [name, links];
 }
 
 export function aboutElements() {
-  const elements = ['wikipedia', 'american go association'];
-  return elements;
+  const wikipedia = listLink(
+    'https://en.wikipedia.org/wiki/Go_(game)',
+    '<i class="fab fa-wikipedia-w"></i>',
+    'wikipedia'
+  );
+  return [wikipedia];
+}
+
+function listLink(href, html, ...classes) {
+  const li = document.createElement('li');
+  const link = document.createElement('a');
+  li.classList.add('link');
+  link.classList.add(...classes);
+  link.href = href;
+  link.innerHTML = html;
+  link.target = 'blank';
+  li.appendChild(link);
+  return li;
 }
