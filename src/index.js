@@ -15,8 +15,11 @@ const root = document.getElementById('root');
 home();
 
 function home() {
-  const title = document.createElement('h1');
-  title.innerHTML = 'Go';
+  const title = document.createElement('div');
+  const text = document.createElement('h1');
+  title.id = 'title';
+  text.innerHTML = 'Go';
+  title.appendChild(text);
   root.append(title);
   options();
 }

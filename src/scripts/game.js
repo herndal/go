@@ -1,5 +1,6 @@
 import Board from './board';
 import Player from './player';
+import { instructions } from './dropdowns';
 
 const black = new Player('black', 'B');
 const white = new Player('white', 'W');
@@ -67,6 +68,7 @@ export default class Game {
     const game = document.createElement('div');
     game.id = 'game';
     game.classList.add('black');
+    instructions(game);
     this.drawBoard(size, game);
     this.drawPlayers(size, game);
     document.getElementById('root').appendChild(game);
@@ -289,8 +291,13 @@ export default class Game {
   }
 
   endGame(docPlayers) {
+    const root = document.getElementById('root');
+    const instructionsButton = document.getElementById('instructions-button');
+    const instructions = document.getElementById('instructions');
+    root.removeChild(instructions);
     const game = document.querySelector('#game');
     game.classList.add('over');
+    game.removeChild(instructionsButton);
     game.removeChild(docPlayers);
     this.drawScore();
   }

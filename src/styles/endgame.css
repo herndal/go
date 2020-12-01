@@ -1,6 +1,10 @@
+#game.over {
+  margin-top: 0;
+}
+
 .endgame {
   display: flex;
-  max-height: 25vh;
+  margin-bottom: 3vh;
   width: 85vw;
   flex-direction: column;
   justify-content: space-between;
@@ -12,6 +16,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  max-width: 20em;
   height: calc(100% - 1.2em - 10px);
 }
 
@@ -20,6 +25,7 @@
   height: fit-content;
   max-height: 100%;
   width: 48%;
+  max-width: 9em;
   justify-content: space-around;
 }
 
@@ -54,5 +60,5 @@
 
 #game button {
   font-size: 1.1em;
-  margin-bottom: 8px;
+  margin: 2vh;
 }
