@@ -5,7 +5,7 @@
   }
 
   .list {
-    margin-top: 50px;
+    margin-top: 1.6em;
   }
 
   #options {
@@ -15,7 +15,7 @@
 
 /* Narrow mobile devices in landscape mode */
 @media only screen and (max-height: 550px) {
-  h1 {
+  #title {
     position: absolute;
     left: 12vw;
   }
@@ -39,7 +39,16 @@
     justify-content: center;
   }
 
+  .deepMind {
+    width: fit-content;
+  }
+
+  #about-list .link {
+    margin: 0.7em;
+  }
+
   #author-list {
+    height: 100vh;
     flex-direction: column-reverse;
     padding: 0;
     justify-content: center;
@@ -89,7 +98,7 @@
   }
 
   .list {
-    margin-top: 75px;
+    margin-top: 2em;
   }
 
   #options {

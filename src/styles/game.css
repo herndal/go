@@ -1,5 +1,5 @@
 #game {
-  margin-top: -60px;
+  margin-top: -2.5em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +20,7 @@
   overflow-y: scroll;
   text-align: center;
   z-index: 1;
-  margin-top: 33px;
+  margin-top: 1em;
   border-radius: 15px;
 }
 #instructions ul {
@@ -36,9 +36,9 @@
   margin-bottom: 0.3em;
 }
 #instructions img {
-  max-width: min(85vw, calc(75vh - 4em - 1.2em - 120px));
-  max-height: min(85vw, calc(75vh - 4em - 1.2em - 120px));
-  margin: 10px auto;
+  width: min(85vw, calc(75vh - 4em - 1.2em - 120px));
+  max-width: 300px;
+  margin: 0.6em auto;
 }
 #instructions.show {
   display: block;
