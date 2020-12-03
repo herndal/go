@@ -47,6 +47,3 @@ Gameplay highlights include beautiful styling, embedded instructions, error mess
 ![Mobile-First Responsive Design](/images/go-responsive-demonstration.gif)
 
   Using vanilla JavaScript and CSS, I was able to make this game play beautifully on any sized screen, with touchscreens, and with mobile devices in landscape mode, based on a flexbox grid design. Of everything I did for this project, making flawless responsive design with limited technologies required the most work by far. I am so happy with the result and the techniques I learned along the way.
-
-## Credits and References
-Thank you to Fontawesome and Flaticon!

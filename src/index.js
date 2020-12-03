@@ -44,6 +44,27 @@ function options() {
   dropdown(options, 'About', aboutElements());
   dropdown(options, 'Author', authorElements());
   root.appendChild(options);
+  const footer = document.createElement('footer');
+  const footerBox = document.createElement('div');
+  const freepik = document.createElement('a');
+  const flaticon = document.createElement('a');
+  const fontawesome = document.createElement('a');
+  freepik.href = "https://www.flaticon.com/authors/freepik";
+  flaticon.href = "https://www.flaticon.com/";
+  fontawesome.href = "https://fontawesome.com/license";
+  freepik.innerHTML = 'Freepik';
+  flaticon.innerHTML= "www.flaticon.com";
+  fontawesome.innerHTML = "www.fontawesome.com";
+  footerBox.append(
+    'Icons made by ',
+    freepik,
+    ' from ',
+    flaticon,
+    ' and ',
+    fontawesome
+  )
+  footer.appendChild(footerBox);
+  document.body.appendChild(footer);
   toggleLandscape(query);
 }
 
@@ -97,6 +118,7 @@ function playGo(gameForm) {
     const game = new Game(size, options);
     root.removeChild(gameForm);
     root.removeChild(back);
+    document.body.removeChild(document.getElementsByTagName('footer')[0]);
     toggleLandscape(query);
     game.play();
   }
