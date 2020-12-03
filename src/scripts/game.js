@@ -15,55 +15,13 @@ export default class Game {
     this.board = new Board(size);
     this.reset();
     this.drawGame(size);
-    this.landscapeListener();
     this.passTurn = this.passTurn.bind(this);
-    this.return = this.return(newGame.bind(this)).bind(this);
+    this.newGame = newGame.bind(this);
   }
-
-  landscapeListener() {
-    let query = window.matchMedia("(max-height: 550px)");
-    this.toggleTitle(query);
-    query.addListener(this.toggleTitle);
-  }
-
-  toggleTitle(query) {
-    const root = document.getElementById('root');
-    const game = document.getElementById('game');
-    let title = document.getElementsByTagName('h1')[0];
-    if (query.matches && game && title) {
-      root.removeChild(title)
-    } else if (title) {
-      return;
-    } else {
-      title = document.createElement('h1');
-      title.innerHTML = 'Go';
-      root.firstChild.before(title);
-    }
-  }
-
-  addTitle(query) {
-    const game = document.getElementById('game');
-    let title = document.getElementsByTagName('h1')[0];
-    if (query.matches && !title) {
-      title = document.createElement('h1');
-      title.innerHTML = 'Go';
-      game.before(title);
-    }
-  }
-
-  return(newGame) {
-    return () => {
-      let query = window.matchMedia("(max-height: 550px)");
-      newGame();
-      this.toggleTitle(query);
-    }
-  }
-
   reset() {
     black.captured = 0;
     white.captured = 0;
   }
-
   drawGame(size) {
     const game = document.createElement('div');
     game.id = 'game';
@@ -74,14 +32,12 @@ export default class Game {
     document.getElementById('root').appendChild(game);
     this.drawStars(size);
   }
-
   addCell(element, color) {
     const cell = document.createElement('div');
     cell.classList.add('cell');
     cell.dataset.stone = color;
     element.appendChild(cell);
   }
-
   drawPlayers(size, game) {
     const docPlayers = document.createElement('div');
     const blackPlayer = document.createElement('div');
@@ -105,7 +61,6 @@ export default class Game {
     docPlayers.append(blackPlayer, whitePlayer);
     game.appendChild(docPlayers);
   }
-
   drawBoard(size, game) {
     const boardGroup = document.createElement('div');
     const board = document.createElement('ul');
@@ -128,7 +83,6 @@ export default class Game {
     boardGroup.appendChild(board);
     game.appendChild(boardGroup);
   }
-
   drawStars(size) {
     let stars = [];
     switch(size) {
@@ -150,12 +104,10 @@ export default class Game {
       cell.classList.add("star");
     });
   }
-
   play() {
     const notPasses = this.addPassListeners();
     document.querySelector('.board').addEventListener("click", this.playTurn(this.board, notPasses));
   }
-
   swap() {
     if (this.currentPlayer === black) {
       this.currentPlayer = white;
@@ -166,7 +118,6 @@ export default class Game {
     game.classList.toggle('white');
     game.classList.toggle('black');
   }
-
   playTurn(board, notPasses) {
     return e => {
       e.preventDefault();
@@ -205,7 +156,6 @@ export default class Game {
       }
     }
   }
-
   addPassListeners() {
     const notPasses = [];
     document.querySelectorAll('.player').forEach(player => {
@@ -217,7 +167,6 @@ export default class Game {
     });
     return notPasses;
   }
-
   resetPassListeners(player) {
     let listeners = [this.offerPass(player), this.notPass(player)];
     player.addEventListener('mouseover', listeners[0]);
@@ -225,7 +174,6 @@ export default class Game {
     player.onclick = this.passTurn(player, listeners);
     return listeners[1];
   }
-
   offerPass(player) {
     return () => {
       if(player.dataset.player === this.currentPlayer.color) {
@@ -236,7 +184,6 @@ export default class Game {
       }
     }
   }
-
   notPass(player) {
     return () => {
       if(player.dataset.pass === 'true') {
@@ -250,7 +197,6 @@ export default class Game {
       }
     }
   }
-
   passTurn(player, listeners) {
     return e => {
       if(player.dataset.player === this.currentPlayer.color) {
@@ -269,7 +215,6 @@ export default class Game {
       }
     }
   }
-
   renderError(message) {
     const board = document.querySelector('.board');
     let error = document.getElementById('error');
@@ -280,16 +225,14 @@ export default class Game {
     }
     error.innerHTML = message;
   }
-  
   clearErrors() {
-    const game = document.getElementById('game');
+    const boardGroup = document.querySelector('.board-group');
     let error = document.getElementById('error');
     while (error) {
-      game.removeChild(error);
+      boardGroup.removeChild(error);
       error = document.getElementById('error');
     }
   }
-
   endGame(docPlayers) {
     const root = document.getElementById('root');
     const instructionsButton = document.getElementById('instructions-button');
@@ -301,45 +244,57 @@ export default class Game {
     game.removeChild(docPlayers);
     this.drawScore();
   }
-
   drawScore() {
     const {blackScore, whiteScore, grid} = this.board.score();
     const boardGroup = document.querySelector('.board-group');
     const endGame = document.createElement('div');
+    const header = document.createElement('div');
     const winMessage = document.createElement('h2');
     const table = document.createElement('div');
     const blackTotals = document.createElement('div');
     const whiteTotals = document.createElement('div');
+    const blackBox = document.createElement('div');
+    const whiteBox = document.createElement('div');
+    const footer = document.createElement('div');
     const goHome = document.createElement('button');
     endGame.classList.add('endgame');
     table.classList.add('table');
     blackTotals.classList.add('totals', 'board', 'black');
     whiteTotals.classList.add('totals', 'board', 'white');
+    blackBox.classList.add('total-box');
+    whiteBox.classList.add('total-box');
     if(blackScore > whiteScore) {
       winMessage.innerHTML = `Black wins!`; //or draw
     } else if(blackScore < whiteScore) {
       winMessage.innerHTML = `White wins!`; //or draw
     } else {
-      winMessage.innerHTML = `It's a draw!`; //or draw
+      winMessage.innerHTML = `Draw!`; //or draw
     }
+    header.id = 'endgame-header';
+    header.appendChild(winMessage);
     goHome.innerHTML = 'Home';
-    goHome.onclick = this.return;
+    goHome.onclick = this.newGame;
+    footer.id = 'board-footer';
+    footer.appendChild(goHome);
     this.addCell(blackTotals, 'B');
     this.addCell(whiteTotals, 'W');
-    this.addScore(blackTotals, blackScore);
-    this.addScore(whiteTotals, whiteScore);
-    this.addCaptured(blackTotals, 'B');
-    this.addCaptured(whiteTotals, 'W');
+    this.addScore(blackBox, blackScore);
+    this.addScore(whiteBox, whiteScore);
+    this.addCaptured(blackBox, 'B');
+    this.addCaptured(whiteBox, 'W');
+    blackTotals.appendChild(blackBox);
+    whiteTotals.appendChild(whiteBox);
     table.append(blackTotals, whiteTotals);
-    endGame.append(winMessage, table);
     for(let i = 0; i < grid.length; i++) {
       let cell = document.querySelector(`[data-index="${i}"]`);
       cell.dataset.stone = grid[i];
     }
+    let query = window.matchMedia("(max-height: 550px)");
+    query.matches ? footer.append(header) : endGame.append(header) ;
+    endGame.append(table);
     boardGroup.before(endGame);
-    boardGroup.appendChild(goHome);
+    boardGroup.appendChild(footer);
   }
-
   addCaptured(element, color) {
     const child = document.createElement('div');
     const message = document.createElement('h3');
@@ -350,7 +305,6 @@ export default class Game {
     child.append(message, captured);
     element.append(child);
   }
-  
   addScore(element, score) {
     const child = document.createElement('div');
     const message = document.createElement('h3');

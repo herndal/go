@@ -12,6 +12,7 @@ import "./styles/endgame.css";
 import "./styles/responsive-design.css";
 
 const root = document.getElementById('root');
+const query = window.matchMedia("(max-height: 550px)");
 home();
 
 function home() {
@@ -22,6 +23,7 @@ function home() {
   title.appendChild(text);
   root.append(title);
   options();
+  query.addListener(toggleLandscape);
 }
 
 function options() {
@@ -42,6 +44,7 @@ function options() {
   dropdown(options, 'About', aboutElements());
   dropdown(options, 'Author', authorElements());
   root.appendChild(options);
+  toggleLandscape(query);
 }
 
 function newGame() {
@@ -76,17 +79,6 @@ function newGame() {
   document.querySelector("#play").addEventListener("submit", playGo(gameForm));
 }
 
-function playGo(gameForm) {
-  return event => {
-    event.preventDefault();
-    const size = document.getElementById('size').value;
-    const game = new Game(size, options, newGame);
-    root.removeChild(gameForm);
-    root.removeChild(back);
-    game.play();
-  }
-}
-
 function backButton() {
   const button = document.createElement('button');
   const back = document.createElement('span');
@@ -96,4 +88,48 @@ function backButton() {
   button.onclick = options;
   button.append('Go ', back);
   return button;
+}
+
+function playGo(gameForm) {
+  return event => {
+    event.preventDefault();
+    const size = document.getElementById('size').value;
+    const game = new Game(size, options);
+    root.removeChild(gameForm);
+    root.removeChild(back);
+    toggleLandscape(query);
+    game.play();
+  }
+}
+
+function toggleLandscape(query) {
+  const root = document.getElementById('root');
+  let over = false;
+  const game = document.getElementById('game');
+  if (game) over = game.classList.contains('over');
+  let titleBlock = document.getElementById('title');
+  if (query.matches && game) {
+    if (titleBlock) root.removeChild(titleBlock);
+    if (over) {
+      const footer = document.getElementById('board-footer');
+      const header = document.getElementById('endgame-header');
+      header.remove();
+      footer.appendChild(header);
+    }
+  } else {
+    if (!titleBlock) {
+      titleBlock = document.createElement('div');
+      titleBlock.id = 'title';
+      const title = document.createElement('h1');
+      title.innerHTML = 'Go';
+      titleBlock.appendChild(title);
+      root.firstChild.before(titleBlock);
+    }
+    if (over) {
+      const table = document.querySelector('.table')
+      const header = document.getElementById('endgame-header');
+      header.remove();
+      table.before(header);
+    }
+  }
 }

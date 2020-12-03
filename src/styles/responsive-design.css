@@ -19,15 +19,12 @@
     position: absolute;
     left: 12vw;
   }
-
   #options {
     margin-top: 10px;
   }
-
   .dropdown {
     flex-direction: row;
   }
-
   .list {
     margin: 0;
     width: 25vw;
@@ -38,56 +35,119 @@
     align-items: center;
     justify-content: center;
   }
-
   .deepMind {
     width: fit-content;
   }
-
   #about-list .link {
     margin: 0.7em;
   }
-
   #author-list {
     height: 100vh;
     flex-direction: column-reverse;
     padding: 0;
     justify-content: center;
   }
-
   #author-links {
     flex-direction: column;
     align-items: center;
     padding-bottom: 4px;
   }
-
   h3:first-child {
     font-size: 0.7em;
     text-align: center;
   }
-
   .new-game, #back {
     position: relative;
     left: 15vw;
   }
-
-  #game.over {
+  #game {
+    margin: 0;
     flex-direction: row;
   }
-
+  #instructions-button {
+    align-self: center;
+    margin: 0 1.2em 0 0;
+  }
+  .board-group .board, #instructions {
+    width: 85vh;
+    height: 85vh;
+  }
+  #instructions {
+    margin: .2em 2.2em 0 0;
+  }
+  .players {
+    height: 83vh;
+    margin: 0 0 0 1.5em;
+    flex-direction: column;
+    width: 4em;
+  }
+  .player {
+    flex-direction: column;
+    width: 100%;
+    font-size: 1.7em;
+  }
+  .player .cell {
+    height: 0.9em;
+    width: 0.9em;
+  }
+  .player.black {
+    background: linear-gradient(rgba(255, 255, 255, 0.25) 0%, rgba(0, 0, 0, 0.75) 85%), url("https://cabins-seeds.s3.amazonaws.com/newblack.jpg");
+    background-size: cover;
+  }
+  .player.white {
+    background: linear-gradient(rgba(0, 0, 0, 0.3) 15%, rgba(250, 250, 250, 0.5) 100%), url("https://cabins-seeds.s3.amazonaws.com/whitewood.jpg");
+    background-size: cover;
+  }
   #game button {
     font-size: 1.2em;
   }
-
-  .endgame {
-    margin: 0 20px 0 0;
-  }
-
   .board-group .board {
     margin: 10px 0 5px;
   }
-
-  .board-group {
+  #game.over, #game.over .board-group, .endgame {
+    flex-direction: row-reverse;
+  }
+  .endgame {
+    margin: 0;
+    width: fit-content;
+  }
+  .table {
+    flex-direction: column;
+    margin: 0 0 0 0.5em;
+    height: 83vh;
+  }
+  .totals {
+    width: fit-content;
+    flex-direction: row;
+    align-items: center;
+  }
+  .totals.black {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0%, rgba(0, 0, 0, 0.75) 85%), url("https://cabins-seeds.s3.amazonaws.com/newblack.jpg");
+    background-size: cover;
+  }
+  .totals.white {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 15%, rgba(250, 250, 250, 0.5) 100%), url("https://cabins-seeds.s3.amazonaws.com/whitewood.jpg");
+    background-size: cover;
+  }
+  .total-box {
+    display: flex;
+    flex-direction: column;
+  }
+  .total {
+    width: fit-content;
+    margin-left: 0.5em;
+    line-height: 1em;
+    align-items: flex-end;
+    align-self: flex-end;
+    flex-direction: column;
+  }
+  #board-footer {
+    display: flex;
     flex-direction: column-reverse;
+    align-items: center;
+    height: 55vh;
+    justify-content: space-between;
+    width: 5em;
   }
 }
 
@@ -96,11 +156,9 @@
   body, select, button {
     font-size: 30px;
   }
-
   .list {
     margin-top: 2em;
   }
-
   #options {
     height: 350px;
     margin-top: 60px;

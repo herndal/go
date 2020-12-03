@@ -14,9 +14,6 @@
   align-items: center;
   justify-content: space-around;
 }
-.over .board-group {
-  height: calc(75vh - 4em);
-}
 .board {
   display: flex;
   flex-direction: column;
