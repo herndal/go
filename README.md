@@ -20,20 +20,33 @@ Go is an ancient game that is treated as sacred and played ritually. I wanted to
 
 1. To carry a calm feeling
 2. To encourage a methodical approach
-3. To create an environment to play without distraction
+3. To create a distraction-free environment for focused play
 
 This led to a design scheme that is one of absolute simplicity, using gentle red and brown tones, with all immediately relevant information presented directly to the user front and center and extra or optional information 
 
 ### Navigation
 
+![Main navigation menu](/images/go-nav-demonstration.gif)
+
 A simple menu with dropdowns under About and Author tags welcomes the user to my game.
 
+
 ### Gameplay
+
+Gameplay highlights include beautiful styling, embedded instructions, error messages for illegal moves, and responsive design for any device, including a landscape mode!
+
+![Gameplay](/images/go-gameplay-demonstration.gif)
 
 ### Technology and Things I Learned
 
 1. The Power of JavaScript
-  The HTML of this document is minimal, less than 25 lines long and mostly concerned with meta information. Beyond that, nothing but JavaScript and CSS power this game, from the dynamic menu with dropdowns to the gameplay itself. Images like the woodgrain board background are hosted on Amazon Web Services S3 for easy access and to trim weight. In conjunction with Webpack, this approach makes for a game that is effortlessly lightweight and quick, designed with mobile-first responsive behavior to be fun to play on any sized device with mouse or touchscreen.
+  The HTML of this document is minimal, less than 25 lines long and mostly concerned with meta information. Beyond that, nothing but JavaScript and CSS power this game, from the dynamic menu with dropdowns to the gameplay itself. Images like the woodgrain board background are hosted on Amazon Web Services S3 for easy access and to trim weight. In conjunction with Webpack, this approach makes for a game that is effortlessly lightweight and quick.
+
+2. Mobile-First Responsive Design
+
+![Mobile-First Responsive Design](/images/go-responsive-demonstration.gif)
+
+  Using vanilla JavaScript and CSS, I was able to make this game play beautifully on any sized screen, with touchscreens, and with mobile devices in landscape mode, based on a flexbox grid design. Of everything I did for this project, making flawless responsive design with limited technologies required the most work by far. I am so happy with the result and the techniques I learned along the way.
 
 ## Credits and References
 Thank you to Fontawesome and Flaticon!

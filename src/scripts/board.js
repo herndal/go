@@ -126,7 +126,16 @@ export default class Board {
       this.grid = this.prevPositions[this.prevPositions.length - 1];
       throw "Ko! Invalid move, try again";
     }
-    player.captured += capturedStones.length;
+    //reduce captured stones to unique values
+    let capturedReduced = [];
+    if (capturedStones.length) {
+      for (let i = 0; i < capturedStones.length; i++) {
+        if (!capturedReduced.includes(capturedStones[i])) {
+          capturedReduced.push(capturedStones[i]);
+        }
+      }
+    }
+    player.captured += capturedReduced.length;
     this.prevPositions.push(this.grid);
     return capturedStones;
   }

@@ -100,9 +100,9 @@ function fillInstructions(instructions) {
   const gettingStartedInfo = document.createElement('ul')
   gettingStartedTitle.innerHTML = 'Getting Started';
   gettingStartedInfo.append(
-    li('The board is empty at the beginning of the game'),
-    li('The first player to go is always Black'),
-    li('Players alternate moves until the game is over')
+    li('The board is empty at the beginning of the game.'),
+    li('The first player to move is Black.'),
+    li('Players alternate turns until the game is over.')
     );
   gettingStarted.append(gettingStartedTitle, gettingStartedInfo);
   const gamePlay = document.createElement('div');
@@ -110,16 +110,21 @@ function fillInstructions(instructions) {
   const gamePlayInfo = document.createElement('ul');
   gamePlayTitle.innerHTML = 'Taking Turns and Capturing';
   gamePlayInfo.append(
-    li('On their turn, a player can either pass their turn or place one stone'),
-    li('Click on any empty intersection to place a stone'),
-    li('Adjacent stones form a group'),
-    li('A liberty is defined as an empty intersection next to a group'),
-    li('When a group has no liberties, it becomes captured and is removed from the board'),
-    li('To pass their turn, a player clicks on their corresponding information box'),
+    li('On their turn, a player can either pass their turn or place one stone.'),
+    li('Click on any empty intersection to place a stone:'),
+    img('https://cabins-seeds.s3.amazonaws.com/go-move-example.png'),
+    li('To pass your turn, click on your color\'s information box:'),
     img('https://cabins-seeds.s3.amazonaws.com/go-pass-example.png'),
-    li('There are two illegal moves: Suicide and Ko'),
-    li('Ko means that a previous position of the board cannot be exactly repeated'),
-    li('Suicide means that a player cannot play a move that results in their own group being captured')
+    li('Adjacent stones form a group.'),
+    li('A liberty is defined as an empty intersection next to a group.'),
+    img('https://cabins-seeds.s3.amazonaws.com/go-liberty-example.png'),
+    li('In this example, the large white group has just one liberty remaining, in the center.'),
+    li('When a group has no liberties, it becomes captured and is removed from the board:'),
+    img('https://cabins-seeds.s3.amazonaws.com/go-captured-example.png'),
+    li('Now the black player has filled the last liberty and captured seven white stones.'),
+    li('There are two illegal moves: Suicide and Ko.'),
+    li('Ko means that a previous position of the board cannot be exactly repeated.'),
+    li('Suicide means that a player cannot play a move that results in their own group being captured.')
     );
   gamePlay.append(gamePlayTitle, gamePlayInfo);
   const winning = document.createElement('div');
@@ -127,9 +132,10 @@ function fillInstructions(instructions) {
   const winningInfo = document.createElement('ul');
   winningTitle.innerHTML = 'Ending the game';
   winningInfo.append(
-    li('The game ends when both players pass their turn'),
-    li('The player who commands more territory on the board wins'),
-    li('A player\'s territory includes the stones on the board of one color and the empty intersections surrounded by that color')
+    li('The game ends when both players pass their turn.'),
+    li('The player who commands more territory on the board wins.'),
+    img('https://cabins-seeds.s3.amazonaws.com/go-endgame-example.png'),
+    li('A player\'s territory includes the stones on the board of one color and the empty intersections surrounded by that color.')
   );
   winning.append(winningTitle, winningInfo)
   instructions.append(gettingStarted, gamePlay, winning);
@@ -138,6 +144,11 @@ function showInstructions(instructions) {
   return event => {
     event.stopPropagation();
     instructions.classList.toggle('show');
+    const board = document.querySelector('.board-group').firstChild;
+    const boardProps = board.getBoundingClientRect();
+    const top = boardProps.top;
+    const left = boardProps.left;
+    instructions.setAttribute('style', `top: ${top}px; left: ${left}px;`);
   }
 }
 function hideInstructions(instructions) {

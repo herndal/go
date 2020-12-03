@@ -20,25 +20,24 @@
   overflow-y: scroll;
   text-align: center;
   z-index: 1;
-  margin-top: 0.7em;
   border-radius: 15px;
 }
 #instructions ul {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   padding-left: 5px;
   font-size: 0.85em;
   text-align: left;
-  list-style: circle inside; 
 }
 #instructions li {
   margin-bottom: 0.3em;
 }
 #instructions img {
-  width: min(85vw, calc(75vh - 4em - 1.2em - 120px));
-  max-width: 300px;
+  width: 60%;
   margin: 0.6em auto;
+  filter: opacity(0.9);
+  border-radius: 10px;
 }
 #instructions.show {
   display: block;
