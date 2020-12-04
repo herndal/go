@@ -77,12 +77,12 @@ export default class Game {
         cell.dataset.stone = "_";
         row.appendChild(cell);
         k++;
-      }
+      };
       board.appendChild(row);
-    }
+    };
     boardGroup.appendChild(board);
     game.appendChild(boardGroup);
-  }
+  };
   drawStars(size) {
     let stars = [];
     switch(size) {
