@@ -8,7 +8,7 @@ body, select, button {
   font-size: large;
   color: #cbb6b1;
 }
-footer {
+/* footer {
   position: absolute;
   bottom: 0;
   font-size: 0.4em;
@@ -23,7 +23,7 @@ footer div {
 footer a {
   text-decoration: none;
   color: #8e7171;
-}
+} */
 button {
   background: transparent;
   border: none;
