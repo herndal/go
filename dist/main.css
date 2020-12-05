@@ -3,244 +3,378 @@ body, ul, div {
   padding: 0;
   box-sizing: border-box;
 }
-
 body, select, button {
   font-family: 'Marcellus', serif;
   font-size: large;
   color: #cbb6b1;
 }
-
+footer {
+  position: fixed;
+  bottom: 10px;
+  font-size: 0.4em;
+  text-align: center;
+  width: 100vw;
+  color: #4e4444;
+}
+footer div {
+  width: 60vw;
+  margin: 0 auto;
+}
+footer a {
+  text-decoration: none;
+  color: #8e7171;
+}
 button {
   background: transparent;
   border: none;
   outline: none;
 }
-
 button:hover {
   background: radial-gradient(#5a3030, transparent 75%);
 }
-
 ul {
   list-style: none;
   -webkit-padding-start: 0;
           padding-inline-start: 0;
 }
-
 h1 {
   font-size: 4em;
   margin: 0;
+  padding-top: 5px;
 }
-
 h2 {
   text-align: center;
   margin: 0 0 10px;
   font-size: 1.2em;
   font-weight: 400;
 }
-
 h3 {
   margin: 0;
   font-weight: 400;
   font-size: 0.9em;
 }
-
+h4 {
+  margin: 1em 0;
+}
 p {
   margin: 0 10px;
 }
-
 hr {
   border-color: #8e7171;
   width: 88%;
   margin: 2px 0px 15px;
 }
+a {
+  color: #8e7171;
+  transition: color 0.15s ease-in-out;
+}
+a:hover {
+  color: #cbb6b1;
+}
 body {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: linear-gradient(90deg, #250000 0%, #4c0f00 50%, #250000 100%);
 }
-
 #root {
-  height: 100vh;
-  max-width: 1000px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
 #options {
   display: flex;
-  margin-top: 30px;
+  margin-top: 5vh;
   flex-direction: column;
   height: 160px;
   justify-content: space-between;
   align-items: center;
 }
-
 .option {
   font-size: 1.1em;
   font-weight: 400;
+  line-height: 1.6;
 }
-
 .dropdown {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .drop-button {
   position: relative;
 }
-
-/* #about-list, #author-list {
-  top: 0;
-  left: 0;
-} */
-
 .list {
   position: absolute;
   display: none;
-  margin-top: 32px;
+  margin-top: 1.4em;
+  justify-content: space-between;
+  align-items: center;
 }
-
+.link {
+  font-size: 1.2em;
+  display: flex;
+  margin: 0.5em;
+}
 .show {
   display: flex;
 }
-
 .link:hover {
   color: #8e7171;
 }
-
+.aga, .deepMind {
+  display: flex;
+}
+.deepMind {
+  width: 2.7em;
+}
+.aga img, .deepMind img {
+  height: 1em;
+  transition: filter 0.15s ease-in-out;
+}
+.aga img {
+  filter: invert(0.6) opacity(0.7);
+}
+.deepMind img {
+  filter: grayscale(1) opacity(0.7);
+}
+.deepMind:hover img {
+  filter: grayscale(1) opacity(0.8) brightness(1.3);
+}
+.aga:hover img {
+  filter: invert(0.8) opacity(0.8);
+}
+.wikipedia {
+  background-color:#8e7171;
+  color: #4c0f00;
+  padding: 3px 2px 0;
+  font-size: 0.6em;
+  border-radius: 3px;
+  transition: background-color 0.15s ease-in-out;
+}
+.wikipedia:hover {
+  background-color:#cbb6b1;
+  color: #4c0f00;
+}
 #author-list {
   flex-direction: column;
-  align-items: center;
   padding-top: 5px;
+  height: 3.2em;
 }
-
 #author-links {
   display: flex;
-  width: 160px;
   justify-content: space-between;
-  margin-bottom: 12px;
-  color: #8e7171;
 }
-
-#author-links .link:hover {
-  color: #cbb6b1;
-}
-
 .new-game {
   margin: 15px auto;
-  width: 300px;
+  width: 15em;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 #play {
   font-size: 1.2em;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 #size {
   background: transparent;
   outline: none;
   border: none;
-  font-size: large;
   margin: 10px 0;
   padding: 0 10px;
   font-family: 'Marcellus', serif;
 }
-
 #size:hover {
   background: radial-gradient(#5a3030, transparent 75%);
 }
-
 #back {
   margin-top: 12px;
 }
-
 .back-go {
   padding-left: 0;
 }
-
 .red {
   color: #8e7171;
 }
+.tooltip {
+  position: absolute;
+  z-index: 1;
+  background: #4c0f00;
+  border-radius: 10px;
+  padding: 6px 12px;
+  box-shadow: 0 0 3px 1px #250000, inset 0 0 5px 1px #250000;
+  font-family: arial;
+  font-size: 0.6em;
+  text-shadow: 0px 1px 1px #250000;
+  color: #cbb6b1;
+}
+/* .tooltip:after {
+  content: " ";
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #250000;
+  position: absolute;
+  top: -8px;
+  left: 10px;
+} */
 #game {
+  margin-top: -2.5em;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
+#instructions-button {
+  align-self: flex-end;
+  padding: 5px;
+  margin: 0 10px 5px 0;
+  font-size: 1.3em;
+}
+#instructions {
+  padding: 5px;
+  width: min(85vw, calc(75vh - 4em - 1.2em - 10px));
+  height: min(85vw, calc(75vh - 4em - 1.2em - 10px));
+  position: absolute;
+  display: none;
+  background: rgba(0, 0, 0, 0.7);
+  overflow-y: scroll;
+  text-align: center;
+  z-index: 1;
+  border-radius: 15px;
+}
+#instructions ul {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding-left: 5px;
+  font-size: 0.85em;
+  text-align: left;
+}
+#instructions li {
+  margin-bottom: 0.3em;
+}
+#instructions img {
+  width: 60%;
+  margin: 0.6em auto;
+  filter: opacity(0.9);
+  border-radius: 10px;
+}
+#instructions.show {
+  display: block;
+}
+::-webkit-scrollbar {
+  width: 3px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #cbb6b1;
+  border-radius: 3px;
+}
 .players {
   display: flex;
   justify-content: space-between;
-  padding-top: 15px;
+  margin-top: 1em;
+  width: 15em;
 }
-
 .player {
   padding: 8px;
   padding-left: 6px;
-  font-size: 30px;
+  font-size: 2em;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100px;
-  height: 50px;
+  width: 3.5em;
   border-radius: 10px;
   border: 1px solid #000;
 }
-
+.player .cell {
+  height: 1em;
+  width: 1em;
+}
 .player[data-player='B'] {
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0%, rgba(0, 0, 0, 0.75) 85%), url("https://cabins-seeds.s3.amazonaws.com/newblack.jpg");
   background-size: cover;
 }
-
 .player[data-player='W'] {
-  flex-direction: row;
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 15%, rgba(250, 250, 250, 0.5) 100%), url('https://cabins-seeds.s3.amazonaws.com/whitewood.jpg');
   background-size: cover;
 }
-
 .player.pass:after {
-  width: 98px;
-  height: inherit;
-  position: absolute;
   content: "Pass";
-  font-size: 1.1em;
   text-align: right;
-  margin-left: -8px;
-  line-height: 50px;
-  border-radius: inherit;
 }
-
 .player.white .captured, .player.white.pass:after {
   color: #4c0f00;
 }
-
 .error {
   margin-bottom: 5px;
 }
+/* Responsive Design
+  >1440px: bigger buttons, bigger font-size
+  <1024px: smaller 19x19 board
+  <440px: smaller 13x13 board
+
+*/
+
+
+
 /* Board layout */
+.board-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
 .board {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
   background: radial-gradient(rgba(155, 155, 155, 0.6), rgba(0, 0, 0, 0.7)), url("https://cabins-seeds.s3.amazonaws.com/go-oak.jpg");
   background-size: cover;
   background-position: center;
   border-radius: 15px;
   border: 1px solid #000;
+  width: min(85vw, calc(75vh - 4em - 1.2em - 10px));
+  height: min(85vw, calc(75vh - 4em - 1.2em - 10px));
 }
 .row {
   display: flex;
+  width: 100%;
 }
 .cell {
-  height: 30px;
-  width: 30px;
   position: relative;
+  height: 100%;
+}
+.s5 .row {
+  height: calc(100% / 5);
+}
+.s9 .row {
+  height: calc(100% / 9);
+}
+.s13 .row {
+  height: calc(100% / 13);
+}
+.s19 .row {
+  height: calc(100% / 19);
+}
+.s5 .cell {
+  width: calc(100% / 5);
+}
+.s9 .cell {
+  width: calc(100% / 9);
+}
+.s13 .cell {
+  width: calc(100% / 13);
+}
+.s19 .cell {
+  width: calc(100% / 19);
 }
 /* Grid lines */
 .cell[data-stone='.']:before, .cell[data-stone='_']:before {
@@ -319,6 +453,9 @@ body {
   background-repeat: no-repeat;
   border-radius: 50%;
 }
+.s5 .star[data-stone='_'], .star[data-stone='.'] {
+  background-image: radial-gradient(#000 10%, transparent 0);
+}
 #game.black .star[data-stone='_']:hover {
   background-color: black;
   background-image: radial-gradient(#000 15%, transparent 0), radial-gradient(circle at 32% 30%, #606060 0%, transparent 90%);
@@ -326,26 +463,42 @@ body {
   box-shadow: 1px 1px 1px #404040;
   opacity: 0.5;
 }
+#game.over {
+  margin-top: 0;
+}
+
 .endgame {
   display: flex;
+  margin-bottom: 3vh;
+  width: 85vw;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .table {
-  margin: 15px 0 5px;
+  margin: 5px 0 0;
   display: flex;
-  width: 380px;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 20em;
+  height: calc(100% - 1.2em - 10px);
 }
 
 .totals {
-  padding: 15px;
+  padding: 10px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-height: 100%;
+  width: 48%;
+  max-width: 9em;
+  justify-content: space-around;
 }
 
 .totals .cell {
-  height: 40px;
-  width: 40px;
+  height: 2.2em;
+  width: 2.2em;
   margin: 0 auto;
 }
 
@@ -353,8 +506,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
-  width: 150px;
+  width: 100%;
+  line-height: 1.5em;
 }
 
 .totals.black {
@@ -374,7 +527,178 @@ body {
 
 #game button {
   font-size: 1.1em;
-  margin-top: 20px;
+  margin: 0.5em;
+}
+/* Tablets */
+@media only screen and (min-width: 600px) {
+  body, select, button {
+    font-size: 25px;
+  }
+
+  .list {
+    margin-top: 1.6em;
+  }
+
+  #options {
+    height: 250px;
+  }
+}
+
+/* Narrow mobile devices in landscape mode */
+@media only screen and (max-height: 550px) {
+  #title {
+    position: absolute;
+    left: 12vw;
+  }
+  #options {
+    margin-top: 10px;
+  }
+  .dropdown {
+    flex-direction: row;
+  }
+  .list {
+    margin: 0;
+    width: 25vw;
+    right: 8vw;
+    top: 0;
+    bottom: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .deepMind {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  #about-list .link {
+    margin: 0.7em;
+  }
+  #author-list {
+    height: 100vh;
+    flex-direction: column-reverse;
+    padding: 0;
+    justify-content: center;
+  }
+  #author-links {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 4px;
+  }
+  h3:first-child {
+    font-size: 0.7em;
+    text-align: center;
+  }
+  .new-game, #back {
+    position: relative;
+    left: 15vw;
+  }
+  #game {
+    margin: 0;
+    flex-direction: row;
+  }
+  #instructions-button {
+    align-self: center;
+    margin: 0 1.2em 0 0;
+  }
+  .board-group .board, #instructions {
+    width: 85vh;
+    height: 85vh;
+  }
+  .players {
+    height: 83vh;
+    margin: 0 0 0 1.5em;
+    flex-direction: column;
+    width: 4em;
+  }
+  .player {
+    flex-direction: column;
+    width: 100%;
+    font-size: 1.7em;
+  }
+  .player .cell {
+    height: 0.9em;
+    width: 0.9em;
+  }
+  .player.black {
+    background: linear-gradient(rgba(255, 255, 255, 0.25) 0%, rgba(0, 0, 0, 0.75) 85%), url("https://cabins-seeds.s3.amazonaws.com/newblack.jpg");
+    background-size: cover;
+  }
+  .player.white {
+    background: linear-gradient(rgba(0, 0, 0, 0.3) 15%, rgba(250, 250, 250, 0.5) 100%), url("https://cabins-seeds.s3.amazonaws.com/whitewood.jpg");
+    background-size: cover;
+  }
+  #game button {
+    font-size: 1.2em;
+  }
+  .board-group .board {
+    margin: 10px 0 5px;
+  }
+  #game.over, #game.over .board-group, .endgame {
+    flex-direction: row-reverse;
+  }
+  .endgame {
+    margin: 0;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .table {
+    flex-direction: column;
+    margin: 0 0 0 0.5em;
+    height: 83vh;
+  }
+  .totals {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    flex-direction: row;
+    align-items: center;
+  }
+  .totals.black {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0%, rgba(0, 0, 0, 0.75) 85%), url("https://cabins-seeds.s3.amazonaws.com/newblack.jpg");
+    background-size: cover;
+  }
+  .totals.white {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 15%, rgba(250, 250, 250, 0.5) 100%), url("https://cabins-seeds.s3.amazonaws.com/whitewood.jpg");
+    background-size: cover;
+  }
+  .total-box {
+    display: flex;
+    flex-direction: column;
+  }
+  .total {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-left: 0.5em;
+    line-height: 1em;
+    align-items: flex-end;
+    align-self: flex-end;
+    flex-direction: column;
+  }
+  #board-footer {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    height: 55vh;
+    justify-content: space-between;
+    width: 5em;
+  }
+}
+
+/* Larger laptops and up */
+@media only screen and (min-width: 1300px) {
+  body, select, button {
+    font-size: 30px;
+  }
+  .list {
+    margin-top: 2em;
+  }
+  #options {
+    height: 350px;
+    margin-top: 60px;
+  }
 }
 
 /*# sourceMappingURL=main.css.map*/
