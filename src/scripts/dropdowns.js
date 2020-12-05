@@ -72,7 +72,7 @@ export function aboutElements() {
   const deepMind = listLink(
     'https://deepmind.com/research/case-studies/alphago-the-story-so-far',
     img('https://upload.wikimedia.org/wikipedia/commons/1/12/DeepMind_logo.png'),
-    'AlphaGo: The project at Google\'s DeepMind that created the first program capable of defeating a Go world champion in 2016. Their story inspired this project!',
+    'In 2016, DeepMind\'s AlphaGo became the first program capable of defeating a Go world champion. Their story inspired this project',
     'deepMind'
   )
   return [aga, wikipedia, deepMind];
