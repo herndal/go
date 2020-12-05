@@ -154,4 +154,14 @@ function toggleLandscape(query) {
       table.before(header);
     }
   }
+  const instructions = document.getElementById('instructions');
+  if (instructions) {
+    if (instructions.classList.contains('show')) {
+      const board = document.querySelector('.board-group').firstChild;
+      const boardProps = board.getBoundingClientRect();
+      const top = boardProps.top;
+      const left = boardProps.left;
+      instructions.setAttribute('style', `top: ${top}px; left: ${left}px;`);
+    }
+  }
 }

@@ -9,8 +9,8 @@ body, select, button {
   color: #cbb6b1;
 }
 footer {
-  position: fixed;
-  bottom: 10px;
+  position: absolute;
+  bottom: 0;
   font-size: 0.4em;
   text-align: center;
   width: 100vw;
