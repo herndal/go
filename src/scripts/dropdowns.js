@@ -203,7 +203,7 @@ function showTip() {
   tooltip.setAttribute('style', 'max-width: 13em');
   const linkProps = this.getBoundingClientRect();
   const tooltipProps = tooltip.getBoundingClientRect(); 
-  const top = linkProps.top + (linkProps.height + 15);
+  const top = linkProps.top - tooltipProps.height - 10;
   const left = linkProps.left + (linkProps.width / 2) - (tooltipProps.width / 2);
   tooltip.setAttribute('style', `max-width: 13em; top: ${top}px; left: ${left}px;`);
 }
