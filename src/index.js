@@ -23,7 +23,7 @@ function home() {
   title.appendChild(text);
   root.append(title);
   options();
-  query.addListener(toggleLandscape);
+  query.addEventListener(toggleLandscape);
 }
 
 function options() {
@@ -118,7 +118,8 @@ function playGo(gameForm) {
     const game = new Game(size, options);
     root.removeChild(gameForm);
     root.removeChild(back);
-    document.body.removeChild(document.getElementsByTagName('footer')[0]);
+    window.root = root;
+    // document.body.removeChild(document.getElementsByTagName('footer')[0]);
     toggleLandscape(query);
     game.play();
   }
